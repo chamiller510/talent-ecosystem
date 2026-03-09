@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Frame-Options" content="ALLOWALL">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>The Intelligent Workforce — Your Hiring Engine</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{--gold:#C9A96E;--bg:#0A0A0A;--rich:#050505;--mid:rgba(255,255,255,0.78);--soft:rgba(255,255,255,0.58);--bdr:rgba(201,169,110,0.12);--green:#00D68F;--blue:#4EA8DE;--amber:#F0C040}
+body{background:var(--bg);color:#E8E0D4;font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden;font-size:18px;line-height:1.7}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3)}
+::selection{background:rgba(201,169,110,0.3);color:#fff}
+section{padding:100px 24px}.ctn{max-width:720px;margin:0 auto}
+.lbl{font-size:12px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;text-align:center}
+h2{font-family:'Playfair Display',Georgia,serif;font-weight:300;text-align:center;line-height:1.25;color:#fff;margin-bottom:20px;font-size:clamp(28px,4.5vw,48px)}
+.sub{font-size:clamp(16px,2vw,20px);color:var(--mid);text-align:center;line-height:1.8;max-width:540px;margin:0 auto 48px}
+.gi{color:var(--gold);font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300}
+.gl{width:40px;height:1px;background:var(--gold);margin:24px auto}
+.fade{opacity:1;transform:translateY(0);transition:opacity 0.8s ease,transform 0.8s ease}
+.js .fade{opacity:0;transform:translateY(30px)}.js .fade.vis{opacity:1;transform:translateY(0)}
+.fade.d1{transition-delay:0.12s}.fade.d2{transition-delay:0.24s}.fade.d3{transition-delay:0.36s}.fade.d4{transition-delay:0.48s}
+@keyframes breathe{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.srow{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:48px 0}
+@media(max-width:600px){.srow{grid-template-columns:1fr}.g3{grid-template-columns:1fr!important}.g4{grid-template-columns:1fr 1fr!important}.sgrid{grid-template-columns:1fr!important}}
+.sbox{background:rgba(201,169,110,0.03);border:1px solid var(--bdr);padding:32px 20px;text-align:center}
+.snum{font-family:'Playfair Display',Georgia,serif;font-size:clamp(32px,5vw,48px);font-weight:300;line-height:1;margin-bottom:8px}
+.slbl{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.5}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px}
+.feat{display:grid;grid-template-columns:48px 1fr;gap:18px;padding:28px 0;border-bottom:1px solid rgba(201,169,110,0.06)}
+.feat:last-child{border-bottom:none}
+.fnum{font-family:'Playfair Display',Georgia,serif;font-size:15px;color:var(--gold);opacity:0.7;padding-top:4px}
+.ftitle{font-family:'Playfair Display',Georgia,serif;font-size:20px;color:#fff;margin-bottom:6px}
+.fdesc{font-size:16px;color:var(--mid);line-height:1.7}
+.ex-box{background:rgba(201,169,110,0.04);border:1px solid rgba(201,169,110,0.12);border-left:3px solid var(--gold);padding:28px 32px;margin:48px 0}
+.ex-label{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.ex-text{font-size:16px;color:var(--mid);line-height:1.8}
+.ex-text strong{color:#fff;font-weight:400}
+.sgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:48px 0}
+.sc{background:rgba(255,255,255,0.02);border:1px solid var(--bdr);padding:28px 20px;text-align:center;transition:border-color 0.3s}
+.sc:hover{border-color:rgba(201,169,110,0.2)}
+.scn{font-size:10px;letter-spacing:0.2em;color:var(--gold);opacity:0.8;margin-bottom:12px;text-transform:uppercase}
+.sct{font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#fff;margin-bottom:8px;line-height:1.4}
+.scd{font-size:15px;color:var(--mid);line-height:1.6;margin-bottom:16px}
+.tag{display:inline-block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:3px}
+.reassess-wrap{margin:48px 0;border:1px solid var(--bdr);background:rgba(201,169,110,0.02)}
+.reassess-header{padding:24px 28px;border-bottom:1px solid var(--bdr);text-align:center}
+.reassess-header p{font-size:11px;color:var(--gold);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:8px}
+.reassess-header h3{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:300;color:#fff;line-height:1.5}
+.reassess-body{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr}
+@media(max-width:640px){.reassess-body{grid-template-columns:1fr}.reassess-divider{display:none}}
+.reassess-divider{background:var(--bdr)}
+.reassess-col{padding:28px 24px;text-align:center}
+.reassess-num{font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:300;margin-bottom:8px}
+.reassess-title{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:14px}
+.reassess-body-text{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7}
+.reassess-footer{padding:20px 28px;border-top:1px solid var(--bdr);text-align:center;font-size:14px;color:rgba(255,255,255,0.4);font-style:italic}
+.rbox{background:rgba(201,169,110,0.04);border:1px solid rgba(201,169,110,0.1);padding:32px;margin:48px auto;max-width:560px}
+.rtitle{font-size:11px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:24px}
+.ri{display:grid;grid-template-columns:28px 1fr;gap:12px;margin-bottom:18px}
+.ri:last-child{margin-bottom:0}
+.ric{font-size:16px;color:var(--gold);opacity:0.8;padding-top:3px}
+.rih{font-size:16px;color:#fff;margin-bottom:2px}
+.ris{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6}
+.workflow-step{display:grid;grid-template-columns:3px 1fr;gap:0;margin-bottom:2px}
+.workflow-line{background:rgba(201,169,110,0.2)}
+.workflow-content{padding:22px 26px;background:rgba(201,169,110,0.03);border:1px solid var(--bdr);border-left:none;transition:background 0.3s}
+.workflow-content:hover{background:rgba(201,169,110,0.06)}
+.workflow-label{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.workflow-title{font-family:'Playfair Display',Georgia,serif;font-size:18px;color:#fff;margin-bottom:6px}
+.workflow-desc{font-size:15px;color:var(--mid);line-height:1.7}
+.ai-badge{display:inline-block;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 10px;background:rgba(0,214,143,0.08);color:var(--green);border:1px solid rgba(0,214,143,0.2);border-radius:2px;margin-left:8px;vertical-align:middle}
+.human-badge{display:inline-block;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 10px;background:rgba(201,169,110,0.08);color:var(--gold);border:1px solid rgba(201,169,110,0.25);border-radius:2px;margin-left:8px;vertical-align:middle}
+footer{padding:48px 24px;text-align:center;border-top:1px solid rgba(201,169,110,0.06);display:flex;flex-direction:column;align-items:center;gap:16px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative">
+  <div style="position:absolute;top:36px;left:0;right:0;display:flex;justify-content:center;animation:fadeUp 1s ease 0.2s both"><svg width="100" height="25" viewBox="0 0 506 128" fill="none" style="opacity:0.35"><path d="M495.711 0C500.932 5.06287e-06 505.18 4.13571 505.18 9.22949V118.771C505.18 123.864 500.932 128 495.711 128H386.617C381.396 128 377.164 123.864 377.164 118.771V9.22949C377.164 4.13579 381.396 0.000140032 386.617 0H495.711ZM257.165 46.1016C274.889 46.1017 286.02 58.7487 286.02 78.3574V84.3135H241.979C243.481 91.5307 248.925 96.2089 256.271 96.209C262.466 96.209 266.65 93.0477 269.812 88.7363L283.097 98.4766C277.013 106.205 267.033 110.628 257.165 110.628C238.195 110.628 223.01 97.9659 223.01 78.3574C223.01 58.7487 238.195 46.1016 257.165 46.1016ZM358.194 109.046H340.726V100.949H340.47C337.548 105.372 330.218 110.562 321.611 110.562C303.392 110.562 291.368 97.4044 291.368 78.8018C291.368 61.7161 302.003 46.0352 319.456 46.0352C327.312 46.0352 334.642 48.1917 338.953 54.1318H339.209V18.9219H358.194V109.046ZM19.7529 90.8574H56.3193V109.077H0V18.9375H19.7529V90.8574ZM182.322 72.7979L203.815 47.9355H227.081L202.187 76.2148L226.57 109.077H202.714L182.578 78.8818H182.322V109.077H163.353V18.9219H182.322V72.7979ZM396.15 47.9844V109.077H415.137V47.9844H396.15ZM463.487 46.4834C454.258 46.4834 448.062 51.5452 445.523 56.3516H445.268V48H427.049V109.077H446.019V78.8662C446.019 70.8822 447.679 63.1699 457.42 63.1699C467.16 63.1701 467.288 72.2872 467.288 79.377V109.077H486.273V75.5771C486.273 59.1301 482.713 46.4834 463.487 46.4834ZM130.954 46.4512C150.195 46.4514 153.74 59.098 153.74 75.5449V109.046H134.754V79.3457C134.754 72.2559 134.626 63.1533 124.886 63.1533C115.145 63.1534 113.501 70.8826 113.501 78.8506V109.062H94.5146V47.9678H112.734V56.3193H112.989C115.512 51.513 121.725 46.4512 130.954 46.4512ZM84.0234 109.061H65.0371V47.9668H84.0234V109.061ZM325.54 62.7383C316.055 62.7383 310.37 69.0773 310.37 78.3066C310.37 87.5362 316.055 93.876 325.54 93.876C335.025 93.8759 340.726 87.5521 340.726 78.3066C340.725 69.0614 335.025 62.7383 325.54 62.7383ZM255.376 59.7705C247.025 59.7707 242.474 65.4711 241.979 71.4111H267.033C267.161 65.0878 262.226 59.7705 255.376 59.7705ZM405.651 17.6123C399.568 17.6123 394.65 22.5306 394.649 28.6143C394.649 34.6981 399.568 39.6328 405.651 39.6328C411.719 39.6328 416.653 34.6821 416.653 28.6143C416.653 22.5466 411.735 17.6123 405.651 17.6123ZM74.5225 17.5957C80.6063 17.5957 85.5244 22.5298 85.5244 28.5977C85.5244 34.6655 80.5903 39.5996 74.5225 39.5996C68.4546 39.5996 63.5205 34.6815 63.5205 28.5977C63.5205 22.5138 68.4546 17.5957 74.5225 17.5957Z" fill="white"/></svg></div>
+  <div style="text-align:center;animation:fadeUp 1.2s ease">
+    <div style="font-size:12px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:40px">The Intelligent Workforce · Layer Three</div>
+    <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(40px,6vw,76px);font-weight:300;line-height:1.08;color:#fff;margin-bottom:8px">Your Hiring</h1>
+    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,6vw,76px);font-weight:300;font-style:italic;color:var(--gold);margin-bottom:32px">Engine</h1>
+    <div style="width:40px;height:1px;background:var(--gold);margin:0 auto 32px;animation:lineGrow 1.2s ease 0.6s both;transform-origin:center"></div>
+    <p style="font-size:clamp(17px,2vw,21px);color:var(--mid);max-width:500px;margin:0 auto;line-height:1.8">If your team is scaling, à la carte is the most expensive way to buy LinkedIn. There's a better structure — and it was built for exactly where you are.</p>
+  </div>
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:breathe 2.5s infinite;display:flex;flex-direction:column;align-items:center;gap:6px">
+    <div style="width:1px;height:28px;background:linear-gradient(180deg,transparent,var(--gold))"></div>
+    <div style="font-size:10px;letter-spacing:0.25em;color:var(--gold)">SCROLL</div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section>
+  <div class="ctn">
+    <div class="fade">
+      <div class="lbl">The Problem With À La Carte</div>
+      <h2>Every time you need more, the price goes up. That's not a coincidence — that's the model.</h2>
+      <p class="sub">LinkedIn is a for-profit company. Annual price increases fund platform improvements — new features, new capabilities, new AI. That's fair. But if you're buying à la carte, you absorb every one of those increases every time you need to grow.</p>
+    </div>
+    <div class="fade d1 srow">
+      <div class="sbox"><div class="snum" style="color:var(--gold)">8–15%+</div><div class="slbl">Typical annual price increases on à la carte products</div></div>
+      <div class="sbox"><div class="snum" style="color:#fff;font-size:clamp(20px,3vw,32px)">Mid-term adds</div><div class="slbl">Need a seat in month 6? That's today's rate — not the price you locked at signing</div></div>
+      <div class="sbox"><div class="snum" style="color:#fff;font-size:clamp(20px,3vw,32px)">No ceiling</div><div class="slbl">No negotiating away the increase. Pay it, or give up product</div></div>
+      <div class="sbox"><div class="snum" style="color:#fff;font-size:clamp(20px,3vw,32px)">Every renewal</div><div class="slbl">Same cycle, every year. More spend, less predictability, less control</div></div>
+    </div>
+    <div class="fade d2 ex-box">
+      <div class="ex-label">What this looks like in practice</div>
+      <div class="ex-text">You signed a contract with 3 recruiter seats and 10 job slots. Six months later, two new reqs open and you need another seat. The price? <strong>Whatever today's market rate is</strong> — which is higher than what you paid at signing. There's no locking in the original rate. There's no exception. That's à la carte. Your budget doesn't control your spend. <strong>The market does.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MODEL -->
+<section style="background:var(--rich);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)">
+  <div class="ctn">
+    <div class="fade">
+      <div class="lbl">The HEP Model</div>
+      <h2>A consumption model. One price, built on your inputs, <span class="gi" style="font-size:inherit">with room to grow built in.</span></h2>
+      <p class="sub">The Hiring Enterprise Package is a different way to buy. Pricing is based on your current team size. We add a 20% product buffer at no additional cost. Then you get a full year of uncapped, unlimited access — seats, slots, all of it.</p>
+    </div>
+    <div class="fade d1 g4" style="margin:48px 0">
+      <div class="sbox"><div class="snum" style="color:var(--gold);font-size:clamp(18px,2.5vw,28px)">Your inputs</div><div class="slbl">Priced on your current TA headcount and job volume</div></div>
+      <div class="sbox"><div class="snum" style="color:#fff;font-size:clamp(18px,2.5vw,28px)">+20% free</div><div class="slbl">Buffer applied at no charge — yours to keep regardless</div></div>
+      <div class="sbox"><div class="snum" style="color:#fff;font-size:clamp(18px,2.5vw,28px)">Year 1</div><div class="slbl">Fully uncapped access — no rationing, no holdbacks</div></div>
+      <div class="sbox"><div class="snum" style="color:var(--gold);font-size:clamp(18px,2.5vw,28px)">Month 9</div><div class="slbl">Usage review — three paths forward, all better than à la carte</div></div>
+    </div>
+    <div class="fade d2 ex-box">
+      <div class="ex-label">How it plays out</div>
+      <div class="ex-text" style="line-height:2">
+        You sign with 3 recruiters and 15 active roles. We price on those inputs, apply the 20% buffer — you're covered up to 4 seats and 18 slots — and Year 1 is fully uncapped.<br><br>
+        Hiring accelerates. You add a 4th recruiter mid-year and push 25 roles simultaneously. <strong>No mid-term add-on conversation. No paying today's rate for something you budgeted at last year's price. You just hire.</strong><br><br>
+        Month 9: your 9-month average puts you just over the buffer. You take the true-up at the rate locked at signing — not current market pricing — and carry uncapped access into Years 2 and 3.<br><br>
+        Year 2, hiring steadies. Fewer roles, but more critical ones. <strong>Same contract. Same price. The structure built for your sprint is now working for your precision.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE SCENARIOS -->
+<section>
+  <div class="ctn">
+    <div class="fade">
+      <div class="lbl">The Month 9 Reassessment</div>
+      <h2>Three paths. Every one of them beats buying à la carte.</h2>
+      <p class="sub">At month 9, we look at your average utilization across the unlimited period. Your 9-month average determines which path applies — and the structure is designed to protect you in every one of them.</p>
+    </div>
+    <div class="fade d1 sgrid">
+      <div class="sc">
+        <div class="scn">Scenario 1</div>
+        <div class="sct">You stayed within the buffer</div>
+        <div class="scd">Utilization at or below 20%. No decision needed. No additional cost. You stay uncapped for Years 2 and 3.</div>
+        <div class="tag" style="background:rgba(0,214,143,0.08);color:var(--green);border:1px solid rgba(0,214,143,0.2)">No action required</div>
+      </div>
+      <div class="sc">
+        <div class="scn">Scenario 2</div>
+        <div class="sct">You grew past the buffer — and want to stay uncapped</div>
+        <div class="scd">Purchase a true-up at the rate locked at signing. Not today's market rate. Your original rate. Stay uncapped for Years 2 and 3.</div>
+        <div class="tag" style="background:rgba(78,168,222,0.08);color:var(--blue);border:1px solid rgba(78,168,222,0.2)">Scale with it</div>
+      </div>
+      <div class="sc">
+        <div class="scn">Scenario 3</div>
+        <div class="sct">You grew past the buffer — and pass on the true-up</div>
+        <div class="scd">You revert to capped access. But you keep the 20% buffer product — free. Any add-ons going forward stay at your locked preferred rate.</div>
+        <div class="tag" style="background:rgba(240,192,64,0.08);color:var(--amber);border:1px solid rgba(240,192,64,0.2)">Still beats ALC</div>
+      </div>
+    </div>
+
+    <div class="fade d3 rbox">
+      <div class="rtitle">Things most clients don't know until I tell them</div>
+      <div class="ri"><div class="ric">◇</div><div><div class="rih">The 20% buffer is yours to keep — no matter what</div><div class="ris">Even if you decline the true-up at month 9, the buffer product stays. It was included at no cost and it doesn't go away.</div></div></div>
+      <div class="ri"><div class="ric">◈</div><div><div class="rih">Non-TA users don't count against your seat inputs</div><div class="ris">Hiring managers and HRBPs with Recruiter access don't eat into your seat count. They ride alongside it.</div></div></div>
+      <div class="ri"><div class="ric">◆</div><div><div class="rih">Frontline roles don't count against your job slots</div><div class="ris">Only knowledge worker roles count toward your allocation. Frontline and hourly roles are promoted without touching your inputs.</div></div></div>
+      <div class="ri"><div class="ric">◉</div><div><div class="rih">Your add-on rate is locked at signing — permanently</div><div class="ris">Whatever you need later, the price was set when you signed. Not when you ask. That protection doesn't exist on à la carte.</div></div></div>
+    </div>
+
+    <div class="fade d4" style="text-align:center;margin-top:32px">
+      <p style="font-size:clamp(18px,2.2vw,24px);font-style:italic;color:var(--mid)">There is no scenario where this loses to à la carte.</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.3);margin-top:10px;letter-spacing:0.08em">Read that again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section style="background:var(--rich);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)">
+  <div class="ctn">
+    <div class="fade">
+      <div class="lbl">What's Inside the Engine</div>
+      <h2>Four products. One structure. Everything your team needs to hire at scale.</h2>
+    </div>
+    <div class="fade d1">
+      <div class="feat">
+        <div class="fnum">01</div>
+        <div>
+          <div class="ftitle">LinkedIn Recruiter Seats</div>
+          <div class="fdesc">The tool your TA team lives in every day. Advanced search across 1B+ members, InMail outreach, candidate pipeline management, collaboration tools. Under the HEP, your team gets full access for Year 1 — no seat rationing, no "priority users only."</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="fnum">02</div>
+        <div>
+          <div class="ftitle">Job Slots + Job Wrapping</div>
+          <div class="fdesc">Your roles surface in search, in feeds, in front of qualified candidates — automatically. Job wrapping distributes every open role across the platform without manual lift. No more choosing which reqs get promoted. Under the HEP, all of them do.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="fnum">03</div>
+        <div>
+          <div class="ftitle">Employer Brand + Traffic Driver Ads</div>
+          <div class="fdesc">Always-on targeted ads that drive talent to your jobs by industry, function, and location — running 24/7, whether your team is logged in or not. Your careers page becomes an active recruiting channel. Unlimited jobs. Unlimited ads. Globally.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="fnum">04</div>
+        <div>
+          <div class="ftitle">LinkedIn Hiring Assistant <span class="ai-badge">AI Agent</span></div>
+          <div class="fdesc">This is the one clients underestimate most. LiHA is an AI agent inside Recruiter that handles the busywork of hiring end-to-end — so your recruiters can focus on what they were actually hired to do.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LiHA workflow -->
+    <div class="fade d2" style="margin-top:56px">
+      <div style="text-align:center;margin-bottom:32px">
+        <div class="lbl" style="margin-bottom:10px">What LiHA Actually Does</div>
+        <p style="font-size:15px;color:var(--soft);max-width:480px;margin:0 auto;line-height:1.7">Every step below marked AI is handled by the agent. Your recruiter owns the steps marked human — the decisions and relationships that actually matter.</p>
+      </div>
+      <div>
+        <div class="workflow-step">
+          <div class="workflow-line" style="background:var(--green);opacity:0.5"></div>
+          <div class="workflow-content">
+            <div class="workflow-label">Step 1</div>
+            <div class="workflow-title">Define &amp; Refine the Role <span class="ai-badge">AI</span></div>
+            <div class="workflow-desc">You provide goals and qualifications. LiHA converts them into optimized searches, suggests required vs. nice-to-have filters, and builds out the project automatically.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-line" style="background:var(--green);opacity:0.5"></div>
+          <div class="workflow-content">
+            <div class="workflow-label">Step 2</div>
+            <div class="workflow-title">Source &amp; Shortlist <span class="ai-badge">AI</span></div>
+            <div class="workflow-desc">Runs dozens of searches across 1B+ members. Delivers a ranked shortlist with a plain-language explanation of why each candidate fits. Your recruiter reviews a curated list — not 300 raw results.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-line" style="background:var(--green);opacity:0.5"></div>
+          <div class="workflow-content">
+            <div class="workflow-label">Step 3</div>
+            <div class="workflow-title">Draft Outreach &amp; Pre-Screen <span class="ai-badge">AI</span></div>
+            <div class="workflow-desc">Drafts personalized InMails at scale. Enables pre-screening questions before outreach sends. Your recruiter reviews and approves — LiHA doesn't act without a human in the loop. The drafting, personalizing, and scheduling? Done.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-line" style="background:var(--green);opacity:0.5"></div>
+          <div class="workflow-content">
+            <div class="workflow-label">Step 4</div>
+            <div class="workflow-title">Evaluate Applicants <span class="ai-badge">AI</span></div>
+            <div class="workflow-desc">Triages applicants from LinkedIn and your ATS into top / maybe / not a fit — with the reasoning shown. Your recruiter stops wading through 200 applications. They review the 20 that matter.</div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-line" style="background:var(--gold);opacity:0.7"></div>
+          <div class="workflow-content">
+            <div class="workflow-label">Step 5</div>
+            <div class="workflow-title">Relationships, Decisions, Closing <span class="human-badge">Your Recruiter</span></div>
+            <div class="workflow-desc">This is where your team lives. The real conversations, the sell, the culture read, the close. LiHA gives 20+ hours a week back per recruiter — not by replacing them, but by eliminating everything that isn't this.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade d3 ex-box" style="margin-top:48px">
+      <div class="ex-label">What this looks like in practice</div>
+      <div class="ex-text">Your recruiter opens their morning with a shortlist they didn't have to build. LiHA ran the searches overnight, ranked the candidates, and drafted the outreach — all they have to do is review and approve. <strong>Three qualified candidates in the pipeline before 9am.</strong><br><br>
+      By afternoon, a candidate who went quiet two weeks ago responds — LiHA sent the follow-up automatically after detecting the InMail open. The recruiter picks up the conversation where it matters: the close. <strong>That's 20+ hours a week back — not from working less, but from never doing the work that didn't require them in the first place.</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section style="min-height:60vh;display:flex;align-items:center;justify-content:center">
+  <div class="ctn" style="text-align:center">
+    <div class="fade">
+      <div class="lbl">The Question</div>
+      <h2>Are you buying smart<br><span style="color:rgba(255,255,255,0.4)">or just buying?</span></h2>
+      <div class="gl"></div>
+      <p style="font-size:clamp(17px,2vw,20px);color:var(--mid);margin-top:24px;line-height:1.8;max-width:480px;margin-left:auto;margin-right:auto">Seats, slots, brand, and AI — one structure, pricing locked at signing, a 20% buffer at no cost, and a reassessment that protects you every which way. À la carte can't offer any of that.</p>
+      <div style="margin-top:56px;font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);opacity:0.8">Layer Three of Three</div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:14px">
+        <div style="width:24px;height:2px;background:rgba(201,169,110,0.2)"></div>
+        <div style="width:24px;height:2px;background:rgba(201,169,110,0.2)"></div>
+        <div style="width:24px;height:2px;background:var(--gold)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg width="80" height="20" viewBox="0 0 506 128" fill="none" style="opacity:0.2"><path d="M495.711 0C500.932 5.06287e-06 505.18 4.13571 505.18 9.22949V118.771C505.18 123.864 500.932 128 495.711 128H386.617C381.396 128 377.164 123.864 377.164 118.771V9.22949C377.164 4.13579 381.396 0.000140032 386.617 0H495.711ZM257.165 46.1016C274.889 46.1017 286.02 58.7487 286.02 78.3574V84.3135H241.979C243.481 91.5307 248.925 96.2089 256.271 96.209C262.466 96.209 266.65 93.0477 269.812 88.7363L283.097 98.4766C277.013 106.205 267.033 110.628 257.165 110.628C238.195 110.628 223.01 97.9659 223.01 78.3574C223.01 58.7487 238.195 46.1016 257.165 46.1016ZM358.194 109.046H340.726V100.949H340.47C337.548 105.372 330.218 110.562 321.611 110.562C303.392 110.562 291.368 97.4044 291.368 78.8018C291.368 61.7161 302.003 46.0352 319.456 46.0352C327.312 46.0352 334.642 48.1917 338.953 54.1318H339.209V18.9219H358.194V109.046ZM19.7529 90.8574H56.3193V109.077H0V18.9375H19.7529V90.8574ZM182.322 72.7979L203.815 47.9355H227.081L202.187 76.2148L226.57 109.077H202.714L182.578 78.8818H182.322V109.077H163.353V18.9219H182.322V72.7979ZM396.15 47.9844V109.077H415.137V47.9844H396.15ZM463.487 46.4834C454.258 46.4834 448.062 51.5452 445.523 56.3516H445.268V48H427.049V109.077H446.019V78.8662C446.019 70.8822 447.679 63.1699 457.42 63.1699C467.16 63.1701 467.288 72.2872 467.288 79.377V109.077H486.273V75.5771C486.273 59.1301 482.713 46.4834 463.487 46.4834ZM130.954 46.4512C150.195 46.4514 153.74 59.098 153.74 75.5449V109.046H134.754V79.3457C134.754 72.2559 134.626 63.1533 124.886 63.1533C115.145 63.1534 113.501 70.8826 113.501 78.8506V109.062H94.5146V47.9678H112.734V56.3193H112.989C115.512 51.513 121.725 46.4512 130.954 46.4512ZM84.0234 109.061H65.0371V47.9668H84.0234V109.061ZM325.54 62.7383C316.055 62.7383 310.37 69.0773 310.37 78.3066C310.37 87.5362 316.055 93.876 325.54 93.876C335.025 93.8759 340.726 87.5521 340.726 78.3066C340.725 69.0614 335.025 62.7383 325.54 62.7383ZM255.376 59.7705C247.025 59.7707 242.474 65.4711 241.979 71.4111H267.033C267.161 65.0878 262.226 59.7705 255.376 59.7705ZM405.651 17.6123C399.568 17.6123 394.65 22.5306 394.649 28.6143C394.649 34.6981 399.568 39.6328 405.651 39.6328C411.719 39.6328 416.653 34.6821 416.653 28.6143C416.653 22.5466 411.735 17.6123 405.651 17.6123ZM74.5225 17.5957C80.6063 17.5957 85.5244 22.5298 85.5244 28.5977C85.5244 34.6655 80.5903 39.5996 74.5225 39.5996C68.4546 39.5996 63.5205 34.6815 63.5205 28.5977C63.5205 22.5138 68.4546 17.5957 74.5225 17.5957Z" fill="white"/></svg>
+  <div style="font-size:11px;letter-spacing:0.35em;color:rgba(255,255,255,0.2);text-transform:uppercase">The Intelligent Workforce · LinkedIn Talent &amp; Learning Solutions</div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+if('IntersectionObserver' in window){const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade').forEach(el=>o.observe(el))}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'))}
+try{if(self!==top)setTimeout(()=>{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'))},300)}catch(e){setTimeout(()=>{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'))},300)}
+</script>
+</body>
+</html>
