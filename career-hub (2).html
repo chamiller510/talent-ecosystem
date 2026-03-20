@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Hub · Develop Your People · The Intelligent Workforce</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2NY7QXVRLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2NY7QXVRLL');
+  function trackEvent(action, label) {
+    gtag('event', action, { event_category: 'Career Hub', event_label: label });
+  }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --li-blue: #0A66C2; --li-blue-dark: #004182; --li-blue-light: #EBF3FB;
+    --warm-sand: #F8F5F0; --dark-navy: #0D1B2A;
+    --text-primary: #1B1F23; --text-secondary: #4B5563; --text-muted: #6B7280;
+    --white: #FFFFFF; --radius: 16px; --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-primary); background: var(--white); overflow-x: hidden; }
+
+  .progress-bar { position: fixed; top: 64px; left: 0; height: 3px; background: var(--li-blue); width: 0%; z-index: 99; transition: width 0.15s linear; border-radius: 0 2px 2px 0; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .li-logo-nav { height: 22px; width: auto; display: block; }
+  .nav-right { display: flex; align-items: center; gap: 4px; }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: all 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--li-blue); background: var(--li-blue-light); }
+  .nav-links a.current { color: var(--li-blue); background: var(--li-blue-light); font-weight: 600; }
+  .nav-cta { background: var(--li-blue); color: white; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 100px; text-decoration: none; margin-left: 12px; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--li-blue-dark); }
+
+  /* LAYER SWITCHER */
+  .layer-switcher { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 90; display: flex; gap: 8px; align-items: center; background: rgba(13,27,42,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 8px 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .ls-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 6px; white-space: nowrap; }
+  .ls-link { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; padding: 7px 14px; border-radius: 100px; transition: all 0.2s; white-space: nowrap; }
+  .ls-link:hover { color: white; background: rgba(255,255,255,0.1); }
+  .ls-link.active { background: var(--li-blue); color: white; }
+  .ls-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); }
+
+  /* HERO */
+  .hero { min-height: 82vh; background: var(--dark-navy); display: flex; align-items: center; position: relative; overflow: hidden; padding: 100px 60px 80px; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(10,102,194,0.25) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; width: 100%; position: relative; z-index: 1; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+  .breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.4); color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Source Serif 4', serif; font-size: clamp(34px, 3.8vw, 52px); font-weight: 300; color: var(--white); line-height: 1.12; margin-bottom: 20px; }
+  .hero h1 strong { font-weight: 700; color: #60A5FA; }
+  .hero-sub { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 32px; }
+
+  /* Hero stat grid */
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hero-stat-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 22px 24px; }
+  .hero-stat-card.blue { background: var(--li-blue); border-color: transparent; }
+  .stat-num { font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 700; color: white; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+  /* SHARED */
+  section { padding: 88px 60px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 14px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--li-blue); }
+  h2 { font-family: 'Source Serif 4', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1.15; margin-bottom: 14px; color: var(--text-primary); }
+  h2 em { font-style: italic; color: var(--li-blue); }
+  .section-lead { font-size: 17px; color: var(--text-secondary); line-height: 1.75; max-width: 600px; margin-bottom: 48px; font-weight: 300; }
+
+  /* PROBLEM */
+  #problem { background: var(--warm-sand); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 48px; }
+  .stat-card { background: var(--white); border-radius: var(--radius); padding: 28px 22px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .stat-card .big { font-family: 'Source Serif 4', serif; font-size: 40px; font-weight: 700; color: var(--li-blue); line-height: 1; margin-bottom: 8px; }
+  .stat-card .lbl { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .scenario-card { background: var(--white); border-radius: var(--radius); padding: 32px; border-left: 4px solid #EF4444; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .scenario-card.good { border-left-color: var(--li-blue); }
+  .sc-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #EF4444; margin-bottom: 14px; }
+  .sc-tag.good { color: var(--li-blue); }
+  .sc-text { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
+  .sc-text strong { color: var(--text-primary); }
+  .sc-outcome { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.07); font-size: 14px; font-weight: 600; }
+  .sc-outcome.bad { color: #B91C1C; }
+  .sc-outcome.good { color: var(--li-blue-dark); }
+
+  /* SHIFT */
+  #shift { background: var(--white); }
+  .shift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .shift-col-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid; }
+  .shift-col-label.old { color: #EF4444; border-color: #FCA5A5; }
+  .shift-col-label.new { color: var(--li-blue); border-color: var(--li-blue); }
+  .shift-items { display: flex; flex-direction: column; gap: 12px; }
+  .shift-item { padding: 14px 18px; border-radius: var(--radius-sm); font-size: 14px; line-height: 1.5; }
+  .shift-item.old { background: rgba(254,226,226,0.4); color: var(--text-secondary); }
+  .shift-item.new { background: var(--li-blue-light); color: var(--text-primary); font-weight: 500; }
+
+  /* CAPABILITIES */
+  #capabilities { background: var(--warm-sand); }
+  .cap-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .cap-card { background: var(--white); border-radius: var(--radius); padding: 28px 24px; border: 1px solid rgba(0,0,0,0.06); transition: all 0.22s; cursor: default; }
+  .cap-card:hover { box-shadow: 0 6px 24px rgba(10,102,194,0.12); transform: translateY(-2px); border-color: var(--li-blue); }
+  .cap-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .cap-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 8px; }
+  .cap-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+  .cap-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .cap-tag { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--li-blue); background: var(--li-blue-light); padding: 4px 10px; border-radius: 100px; }
+
+  /* USE CASES */
+  #usecases { background: var(--white); }
+  .use-cases { display: flex; flex-direction: column; gap: 24px; }
+  .use-case { background: var(--warm-sand); border-radius: var(--radius); padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .uc-setup strong { color: var(--text-primary); display: block; font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+  .uc-setup { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+  .uc-result { background: var(--white); border-radius: var(--radius-sm); padding: 20px 22px; border-left: 3px solid var(--li-blue); }
+  .uc-result-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 8px; }
+  .uc-result-text { font-size: 14px; color: var(--text-primary); line-height: 1.65; }
+
+  /* EVIDENCE */
+  #evidence { background: var(--dark-navy); padding: 88px 60px; }
+  #evidence .section-eyebrow { color: #60A5FA; }
+  #evidence .dot { background: #60A5FA; }
+  #evidence h2 { color: white; }
+  #evidence h2 em { color: #60A5FA; }
+  #evidence .section-lead { color: rgba(255,255,255,0.55); }
+  .evidence-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 40px; }
+  .evidence-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 28px 24px; text-align: center; }
+  .ev-num { font-family: 'Source Serif 4', serif; font-size: 48px; font-weight: 700; color: #60A5FA; line-height: 1; margin-bottom: 10px; }
+  .ev-label { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  .ecosystem-callout { background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.4); border-radius: var(--radius); padding: 24px 28px; display: flex; gap: 16px; align-items: center; }
+  .ec-icon { font-size: 28px; flex-shrink: 0; }
+  .ec-text { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+  .ec-text strong { color: white; }
+
+  /* CTA */
+  .page-cta { background: var(--li-blue-dark); padding: 72px 60px; }
+  .page-cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+  .page-cta h2 { color: white; font-family: 'Source Serif 4', serif; font-size: clamp(22px, 2.4vw, 32px); font-weight: 400; margin-bottom: 8px; }
+  .page-cta p { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .cta-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { padding: 12px 26px; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+  .btn-primary { background: white; color: var(--li-blue-dark); }
+  .btn-primary:hover { background: var(--li-blue-light); }
+  .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,0.35); }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  footer { background: var(--dark-navy); padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); }
+  .li-logo-footer { height: 15px; width: auto; opacity: 0.4; }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 20px; }
+    .nav-links, .nav-cta { display: none; }
+    section, #evidence { padding: 60px 24px; }
+    .hero { padding: 80px 24px 60px; }
+    .hero-inner, .problem-grid, .shift-grid, .use-case, .page-cta-inner { grid-template-columns: 1fr; gap: 24px; }
+    .cap-grid, .evidence-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .layer-switcher { display: none; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="the-intelligent-workforce.html">
+    <svg class="li-logo-nav" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="435.375" y="10.125" width="119.25" height="122.625" fill="white"/><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8408 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8408 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="#0A66C2"/></svg>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="career-hub.html" class="current">Develop Your People</a></li>
+      <li><a href="talent-insights.html">Know Your Market</a></li>
+      <li><a href="hiring-engine.html">HEP + Pricing</a></li>
+    </ul>
+    <a href="hiring-engine.html" class="nav-cta" onclick="trackEvent('nav_cta','See HEP')">See HEP →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="the-intelligent-workforce.html">The Intelligent Workforce</a>
+        <span>›</span>
+        <span style="color:rgba(255,255,255,0.6);">Layer One · Career Hub</span>
+      </div>
+      <div class="hero-eyebrow">● Layer One · Career Hub</div>
+      <h1>Before you hire anyone new —<br>know the workforce<br>you <strong>already have.</strong></h1>
+      <p class="hero-sub">Most companies are hiring externally for roles that could be filled internally. Losing people who never saw a path forward. Onboarding without structure and hoping for the best. Career Hub fixes all three.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-card blue">
+        <div class="stat-num">63%</div>
+        <div class="stat-label">of employees who left said there was no path to advance</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">67%</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">of organizations haven't figured out internal career development</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">1 in 5</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">employees feel confident they can move internally</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">85%</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">of managers say internal mobility retains top talent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Problem</div>
+    <h2>The people you need<br><em>are already on your payroll.</em></h2>
+    <p class="section-lead">The most expensive hire is often the one you didn't have to make. Before you post externally, Career Hub shows you what you already have — and what it would take to develop it.</p>
+
+    <div class="problem-grid">
+      <div class="scenario-card">
+        <div class="sc-tag">❌ What's happening right now</div>
+        <p class="sc-text">You hire a new associate. They get a laptop, a login, and a "good luck." <strong>No 30-60-90 day plan. No structured onboarding. No clear picture of what success looks like.</strong> Their manager is figuring it out on the fly. Three months in, the associate is still ramping while peers at other companies are already productive. Six months in, they leave — and you start over.</p>
+        <div class="sc-outcome bad">One bad onboarding. One resignation. One external search. Repeat.</div>
+      </div>
+      <div class="scenario-card good">
+        <div class="sc-tag good">✓ With Career Hub</div>
+        <p class="sc-text">Your senior associate has been in the role for two years. She's strong — but starting to wonder what's next. Before Career Hub, she'd quietly update her LinkedIn and start looking. Now, <strong>she opens Career Hub and sees exactly what's required to move to VP</strong> — the skills she has, the ones she's missing, and a personalized learning path to close the gap. Her manager sees the same view and brings it into their next 1:1.</p>
+        <div class="sc-outcome good">She's not thinking about leaving. She's thinking about growing — here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIFT -->
+<section id="shift">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Shift</div>
+    <h2>Stop hiring blind.<br><em>Start building from within.</em></h2>
+    <p class="section-lead">The most effective workforce strategy in 2026 isn't who you can recruit — it's how well you can see and develop who you already have.</p>
+    <div class="shift-grid">
+      <div>
+        <div class="shift-col-label old">❌ The Old Approach</div>
+        <div class="shift-items">
+          <div class="shift-item old">Hire first, figure out development later</div>
+          <div class="shift-item old">Skills gaps discovered at the exit interview</div>
+          <div class="shift-item old">Onboarding is a shared folder and a prayer</div>
+          <div class="shift-item old">Internal mobility is a rumor, not a system</div>
+          <div class="shift-item old">Post externally first — internal candidates are an afterthought</div>
+        </div>
+      </div>
+      <div>
+        <div class="shift-col-label new">✓ With Career Hub</div>
+        <div class="shift-items">
+          <div class="shift-item new">Develop first. Hire externally only for what's genuinely missing.</div>
+          <div class="shift-item new">Skills gaps visible in real time — before people start looking elsewhere</div>
+          <div class="shift-item new">Onboarding is automated, measured, and role-specific from day one</div>
+          <div class="shift-item new">Internal mobility is a visible, structured pathway for every employee</div>
+          <div class="shift-item new">TA sees internal candidates in Recruiter before posting a single external job</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What's Inside</div>
+    <h2>Six capabilities.<br><em>One connected talent picture.</em></h2>
+    <p class="section-lead">Career Hub isn't a training platform. It's a workforce intelligence layer that connects what your people know, where they can go, and what your TA team sees when they recruit.</p>
+    <div class="cap-grid">
+      <div class="cap-card" onclick="trackEvent('cap_click','Next Role Explorer')">
+        <span class="cap-icon">🗺️</span>
+        <div class="cap-num">Capability 01</div>
+        <div class="cap-title">Next Role Explorer</div>
+        <div class="cap-desc">Employees see how people like them have actually moved within your company — powered by real career data, not org chart assumptions or manager opinions.</div>
+        <span class="cap-tag">Reduces "I don't see a path" conversations</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_click','Skills Intelligence')">
+        <span class="cap-icon">🔍</span>
+        <div class="cap-num">Capability 02</div>
+        <div class="cap-title">Skills Intelligence</div>
+        <div class="cap-desc">Real-time visibility into every skill your workforce has and every one you're missing. The platform surfaces what's shifting in your industry and flags gaps before they become hiring crises.</div>
+        <span class="cap-tag">No surveys. No spreadsheets.</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_click','Career Pathing')">
+        <span class="cap-icon">📈</span>
+        <div class="cap-num">Capability 03</div>
+        <div class="cap-title">Role Guides + Career Pathing</div>
+        <div class="cap-desc">Structured pathways showing exactly what skills are needed for any role. Auto-generated from LinkedIn data, customizable by you. Every employee sees their path and the learning to get there.</div>
+        <span class="cap-tag">Built from 1B+ career journeys</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_click','AI Coaching')">
+        <span class="cap-icon">🤖</span>
+        <div class="cap-num">Capability 04</div>
+        <div class="cap-title">AI-Powered Coaching</div>
+        <div class="cap-desc">Practice real conversations — performance reviews, client interactions, difficult feedback — with AI that evaluates tone, structure, and content. Real-time feedback, no audience required.</div>
+        <span class="cap-tag">For managers and individual contributors</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_click','Internal Mobility')">
+        <span class="cap-icon">🔗</span>
+        <div class="cap-num">Capability 05</div>
+        <div class="cap-title">Internal Mobility Engine</div>
+        <div class="cap-desc">Connects directly to LinkedIn Recruiter. Your hiring team sees internal candidates expressing interest before you spend a dollar sourcing externally. The best hire might already be in the building.</div>
+        <span class="cap-tag">TA sees internal first</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_click','Reporting')">
+        <span class="cap-icon">📊</span>
+        <div class="cap-num">Capability 06</div>
+        <div class="cap-title">Career Insights Reporting</div>
+        <div class="cap-desc">Track role guide views, certifications earned, internal jobs explored, learning completion. Exportable. Actionable. Proof your program is working — in numbers leadership can actually read.</div>
+        <span class="cap-tag">Show the ROI of development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What This Looks Like</div>
+    <h2>Three moments where<br><em>Career Hub changes the outcome.</em></h2>
+    <p class="section-lead">Real situations. What happens when your team has visibility versus when they don't.</p>
+    <div class="use-cases">
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Situation: A strong employee is quietly checking out.</strong>
+          She hasn't said anything. Her work is still solid. But she's been in the same role for 26 months, her manager hasn't brought up growth in two quarters, and she's started clicking on job alerts again.
+          <br><br>Without Career Hub: you find out at the resignation conversation.
+          <br>With Career Hub: her manager sees her path engagement drop, the system flags it, and the 1:1 that week opens with "here's what VP looks like for someone in your position."
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The outcome</div>
+          <div class="uc-result-text">She doesn't leave. You don't spend 6 months and $40K replacing someone you could have kept with one conversation backed by data.</div>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Situation: You have a req open. You're about to post it externally.</strong>
+          It's a senior operations role. You assume there's no one internal — the team is small and you hired for specific functions, not breadth.
+          <br><br>Career Hub's Internal Mobility Engine surfaces two employees who've been actively exploring this role type. One has already completed 80% of the required skills pathway on her own time.
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The outcome</div>
+          <div class="uc-result-text">You skip the external search. She's hired in three weeks at a fraction of the cost. The role she vacates is a more junior backfill — cheaper and easier to fill externally.</div>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Situation: A skill is becoming critical in your industry. Your team doesn't have it.</strong>
+          Career Hub's skills intelligence is pulling from real-time LinkedIn data. It flags that AI proficiency just became a top-3 trending skill for operations roles in financial services — and only 9% of your operations team has it.
+          <br><br>Your competitors don't know this yet. They'll find out when they try to hire for it next year and can't.
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The outcome</div>
+          <div class="uc-result-text">You roll out a targeted AI learning path to your ops team this quarter. Six months from now, your workforce has the skill your competitors are scrambling to hire for. That's not reacting to the market — that's staying ahead of it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section id="evidence">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Evidence</div>
+    <h2>The results are<br><em>measurable.</em></h2>
+    <p class="section-lead">These aren't projections. They're outcomes from organizations that made internal development a system instead of a suggestion.</p>
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <div class="ev-num">22%</div>
+        <div class="ev-label">Greater employee tenure with active career pathing</div>
+      </div>
+      <div class="evidence-card">
+        <div class="ev-num">20%</div>
+        <div class="ev-label">Longer retention with LinkedIn Learning integrated</div>
+      </div>
+      <div class="evidence-card">
+        <div class="ev-num">8.5×</div>
+        <div class="ev-label">More internal job discovery when employees have visibility</div>
+      </div>
+    </div>
+    <div class="ecosystem-callout">
+      <div class="ec-icon">🔗</div>
+      <div class="ec-text">Companies using both LinkedIn Hiring and Learning see <strong>11% higher internal mobility rates.</strong> The three layers of The Intelligent Workforce aren't just complementary — the effect is measurable when they work together.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE CTA -->
+<div class="page-cta">
+  <div class="page-cta-inner">
+    <div>
+      <h2>Are you building a workforce or just filling seats?</h2>
+      <p>Career Hub is the foundation. See what you have, move what you can, build what's missing.</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="the-intelligent-workforce.html" class="btn btn-outline" onclick="trackEvent('cta_click','Back to Hub')">← Back to Hub</a>
+      <a href="talent-insights.html" class="btn btn-outline" onclick="trackEvent('cta_click','Talent Insights')">Layer 2: Know Your Market</a>
+      <a href="hiring-engine.html" class="btn btn-primary" onclick="trackEvent('cta_click','HEP')">Layer 3: HEP + Pricing →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="li-logo-footer" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8407 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8407 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="white"/></svg>
+  <p>Layer One · The Intelligent Workforce · LinkedIn Talent &amp; Learning Solutions</p>
+</footer>
+
+<!-- LAYER SWITCHER -->
+<div class="layer-switcher">
+  <span class="ls-label">Layers</span>
+  <div class="ls-divider"></div>
+  <a href="career-hub.html" class="ls-link active" onclick="trackEvent('layer_switch','Career Hub')">① Develop</a>
+  <a href="talent-insights.html" class="ls-link" onclick="trackEvent('layer_switch','Intelligence')">② Intelligence</a>
+  <a href="hiring-engine.html" class="ls-link" onclick="trackEvent('layer_switch','HEP')">③ HEP + AI</a>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.cap-card, .scenario-card, .use-case, .shift-item, .evidence-card, .stat-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.4s ease, transform 0.4s ease';
+    fadeObs.observe(el);
+  });
+  const milestones = {25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100);
+    [25,50,75,100].forEach(m => { if(pct>=m && !milestones[m]){ milestones[m]=true; trackEvent('scroll_depth', m+'%'); } });
+  });
+</script>
+</body>
+</html>

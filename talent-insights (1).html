@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Insights · The Intelligent Workforce</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2NY7QXVRLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2NY7QXVRLL');
+  function trackEvent(action, label) {
+    gtag('event', action, { event_category: 'Talent Insights', event_label: label });
+  }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --li-blue: #0A66C2;
+    --li-blue-dark: #004182;
+    --li-blue-light: #EBF3FB;
+    --warm-sand: #F8F5F0;
+    --dark-navy: #0D1B2A;
+    --text-primary: #1B1F23;
+    --text-secondary: #4B5563;
+    --text-muted: #6B7280;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-primary); background: var(--white); overflow-x: hidden; }
+
+  .progress-bar { position: fixed; top: 64px; left: 0; height: 3px; background: var(--li-blue); width: 0%; z-index: 99; transition: width 0.15s linear; border-radius: 0 2px 2px 0; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0 40px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .li-logo-nav { height: 22px; width: auto; display: block; }
+  .nav-right { display: flex; align-items: center; gap: 4px; }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    text-decoration: none; padding: 8px 14px; border-radius: 8px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--li-blue); background: var(--li-blue-light); }
+  .nav-links a.current { color: var(--li-blue); background: var(--li-blue-light); font-weight: 600; }
+  .nav-cta {
+    background: var(--li-blue); color: white; font-size: 13px; font-weight: 600;
+    padding: 8px 18px; border-radius: 100px; text-decoration: none;
+    margin-left: 12px; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--li-blue-dark); }
+
+  /* LAYER SWITCHER — persistent sub-nav */
+  .layer-switcher {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 90; display: flex; gap: 8px; align-items: center;
+    background: rgba(13,27,42,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px; padding: 8px 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .ls-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 6px; white-space: nowrap; }
+  .ls-link {
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.55);
+    text-decoration: none; padding: 7px 14px; border-radius: 100px;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .ls-link:hover { color: white; background: rgba(255,255,255,0.1); }
+  .ls-link.active { background: var(--li-blue); color: white; }
+  .ls-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); }
+
+  /* HERO */
+  .hero {
+    min-height: 80vh; background: var(--dark-navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 60px 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(10,102,194,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px; align-items: center; width: 100%;
+    position: relative; z-index: 1;
+  }
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+  .breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .breadcrumb span { color: rgba(255,255,255,0.2); }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.4);
+    color: #60A5FA; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300; color: var(--white); line-height: 1.12; margin-bottom: 20px;
+  }
+  .hero h1 strong { font-weight: 700; color: #60A5FA; }
+  .hero-sub { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 32px; }
+
+  .hero-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  .hero-stat-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 22px 24px;
+  }
+  .hero-stat-card.blue { background: var(--li-blue); border-color: transparent; }
+  .stat-num { font-family: 'Source Serif 4', serif; font-size: 36px; font-weight: 700; color: white; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+
+  /* SHARED */
+  section { padding: 88px 60px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 14px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--li-blue); }
+  h2 { font-family: 'Source Serif 4', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1.15; margin-bottom: 14px; color: var(--text-primary); }
+  h2 em { font-style: italic; color: var(--li-blue); }
+  .section-lead { font-size: 17px; color: var(--text-secondary); line-height: 1.75; max-width: 580px; margin-bottom: 52px; font-weight: 300; }
+
+  /* PROBLEM SECTION */
+  #problem { background: var(--warm-sand); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .scenario-card {
+    background: var(--white); border-radius: var(--radius); padding: 32px;
+    border-left: 4px solid #EF4444; box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+  .scenario-card.good { border-left-color: var(--li-blue); }
+  .sc-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #EF4444; margin-bottom: 14px; }
+  .sc-tag.good { color: var(--li-blue); }
+  .sc-text { font-size: 15px; line-height: 1.75; color: var(--text-secondary); }
+  .sc-text strong { color: var(--text-primary); }
+  .sc-outcome { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.07); font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .sc-outcome.bad { color: #B91C1C; }
+  .sc-outcome.good { color: var(--li-blue-dark); }
+
+  /* SHIFT SECTION */
+  #shift { background: var(--white); }
+  .shift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .shift-col-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid; }
+  .shift-col-label.old { color: #EF4444; border-color: #FCA5A5; }
+  .shift-col-label.new { color: var(--li-blue); border-color: var(--li-blue); }
+  .shift-items { display: flex; flex-direction: column; gap: 12px; }
+  .shift-item { padding: 14px 18px; border-radius: var(--radius-sm); font-size: 14px; line-height: 1.5; }
+  .shift-item.old { background: rgba(254,226,226,0.4); color: var(--text-secondary); }
+  .shift-item.new { background: var(--li-blue-light); color: var(--text-primary); font-weight: 500; }
+
+  /* CAPABILITIES */
+  #capabilities { background: var(--warm-sand); }
+  .cap-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .cap-card {
+    background: var(--white); border-radius: var(--radius); padding: 28px 24px;
+    border: 1px solid rgba(0,0,0,0.06); transition: all 0.22s;
+  }
+  .cap-card:hover { box-shadow: 0 6px 24px rgba(10,102,194,0.12); transform: translateY(-2px); border-color: var(--li-blue); }
+  .cap-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .cap-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+  .cap-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .cap-tag { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--li-blue); background: var(--li-blue-light); padding: 4px 10px; border-radius: 100px; }
+
+  /* SCENARIOS / USE CASES */
+  #scenarios { background: var(--white); }
+  .use-cases { display: flex; flex-direction: column; gap: 24px; }
+  .use-case { background: var(--warm-sand); border-radius: var(--radius); padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .uc-setup { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .uc-setup strong { color: var(--text-primary); display: block; font-size: 15px; margin-bottom: 8px; }
+  .uc-result { background: var(--white); border-radius: var(--radius-sm); padding: 20px 22px; border-left: 3px solid var(--li-blue); }
+  .uc-result-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 8px; }
+  .uc-result-text { font-size: 14px; color: var(--text-primary); line-height: 1.6; }
+
+  /* REFRAME */
+  #reframe { background: var(--dark-navy); }
+  #reframe h2 { color: white; }
+  #reframe h2 em { color: #60A5FA; }
+  #reframe .section-lead { color: rgba(255,255,255,0.55); }
+  #reframe .section-eyebrow { color: #60A5FA; }
+  #reframe .dot { background: #60A5FA; }
+  .reframe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .reframe-card {
+    border-radius: var(--radius); padding: 32px;
+  }
+  .reframe-card.without { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); }
+  .reframe-card.with { background: rgba(10,102,194,0.15); border: 1px solid rgba(10,102,194,0.35); }
+  .rf-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .rf-label.without { color: #FCA5A5; }
+  .rf-label.with { color: #60A5FA; }
+  .rf-items { display: flex; flex-direction: column; gap: 10px; }
+  .rf-item { font-size: 14px; line-height: 1.5; display: flex; gap: 10px; }
+  .rf-item.without { color: rgba(255,255,255,0.5); }
+  .rf-item.with { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  /* CTA */
+  .page-cta { background: var(--li-blue-dark); padding: 72px 60px; }
+  .page-cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+  .page-cta h2 { color: white; font-family: 'Source Serif 4', serif; font-size: clamp(22px, 2.4vw, 32px); font-weight: 400; margin-bottom: 8px; }
+  .page-cta p { font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300; }
+  .cta-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { padding: 12px 26px; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+  .btn-primary { background: white; color: var(--li-blue-dark); }
+  .btn-primary:hover { background: var(--li-blue-light); }
+  .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,0.35); }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* FOOTER */
+  footer { background: var(--dark-navy); padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .li-logo-footer { height: 15px; width: auto; opacity: 0.4; }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    section { padding: 60px 24px; }
+    .hero { padding: 80px 24px 60px; }
+    .hero-inner, .problem-grid, .shift-grid, .cap-grid, .use-case, .reframe-grid, .page-cta-inner { grid-template-columns: 1fr; gap: 28px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .cap-grid { grid-template-columns: 1fr 1fr; }
+    .layer-switcher { display: none; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="the-intelligent-workforce.html">
+    <svg class="li-logo-nav" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="435.375" y="10.125" width="119.25" height="122.625" fill="white"/><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8408 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8408 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="#0A66C2"/></svg>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="the-intelligent-workforce.html#develop">Develop Your People</a></li>
+      <li><a href="talent-insights.html" class="current">Know Your Market</a></li>
+      <li><a href="hiring-engine.html">HEP + Pricing</a></li>
+    </ul>
+    <a href="hiring-engine.html" class="nav-cta" onclick="trackEvent('nav_cta','See HEP')">See HEP →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="the-intelligent-workforce.html">The Intelligent Workforce</a>
+        <span>›</span>
+        <span style="color:rgba(255,255,255,0.6);">Layer Two · Talent Insights</span>
+      </div>
+      <div class="hero-eyebrow">● Layer Two · Market Intelligence</div>
+      <h1>You're making<br>million-dollar decisions<br>with <strong>yesterday's data.</strong></h1>
+      <p class="hero-sub">Annual salary surveys are months old by the time you read them. Your competitors moved last quarter. Talent Insights gives you the real-time picture — before you make a move, not after you regret one.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-card blue">
+        <div class="stat-num">12B+</div>
+        <div class="stat-label">Data points powering every report</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">1B+</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">Professional profiles updated in real time</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">Daily</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">Market updates — not quarterly snapshots</div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num" style="color:#60A5FA">500M+</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.6)">Skills added to profiles every year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Cost of Not Knowing</div>
+    <h2>What flying blind<br><em>actually costs you.</em></h2>
+    <p class="section-lead">Wrong offer. Lost candidate. Three months of recruiting time. Back to zero. These aren't edge cases — they're what happens when your data is older than your last salary review.</p>
+    <div class="problem-grid">
+      <div class="scenario-card">
+        <div class="sc-tag">❌ Without Talent Insights</div>
+        <p class="sc-text">You're hiring a senior financial analyst in Denver. You offer <strong>$165K based on last year's Mercer survey.</strong> The candidate declines. You find out later two competitors in the same market are offering $185K–$195K. You lost the candidate, wasted three months of recruiting time, and now you're starting the search over — with the same outdated data.</p>
+        <div class="sc-outcome bad">One offer. Wrong number. Back to zero.</div>
+      </div>
+      <div class="scenario-card good">
+        <div class="sc-tag good">✓ With Talent Insights</div>
+        <p class="sc-text">You're hiring a remote financial analyst. Your recruiter defaults to Dallas — that's where the team sits. You pull a Talent Insights report. <strong>Austin has a deeper talent pool for this exact role, and comp runs 10–15% lower.</strong> Same qualifications. Less competition. Lower cost. You widen the search, source directly, and skip the agency entirely.</p>
+        <div class="sc-outcome good">One report. One decision. Thousands saved — and you filled it faster.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIFT -->
+<section id="shift">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Shift</div>
+    <h2>Static data decays.<br><em>This is alive.</em></h2>
+    <p class="section-lead">Most talent decisions are made on data that's already 6–12 months old. Talent Insights closes that gap — permanently.</p>
+    <div class="shift-grid">
+      <div>
+        <div class="shift-col-label old">❌ The Old Way</div>
+        <div class="shift-items">
+          <div class="shift-item old">Annual salary surveys — months old by the time you read them</div>
+          <div class="shift-item old">Guessing which markets have the talent you need</div>
+          <div class="shift-item old">Paying agencies to find what you could source yourself</div>
+          <div class="shift-item old">Finding out about competitor moves months after they happen</div>
+          <div class="shift-item old">TA can't prove strategic value to leadership — no data to show</div>
+        </div>
+      </div>
+      <div>
+        <div class="shift-col-label new">✓ With Talent Insights</div>
+        <div class="shift-items">
+          <div class="shift-item new">Real-time compensation data — know the number before the conversation</div>
+          <div class="shift-item new">Map the exact talent pool before you post a single req</div>
+          <div class="shift-item new">Source directly from where talent is clustering — skip the middleman</div>
+          <div class="shift-item new">See competitor headcount trends and attrition signals live</div>
+          <div class="shift-item new">Data storytelling that earns TA a seat at the leadership table</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What's Inside</div>
+    <h2>Six intelligence layers.<br><em>One connected picture.</em></h2>
+    <p class="section-lead">Each capability answers a question your team is already asking — just without the guesswork.</p>
+    <div class="cap-grid">
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Compensation Intelligence')">
+        <span class="cap-icon">💰</span>
+        <div class="cap-title">Compensation Intelligence</div>
+        <div class="cap-desc">Real-time pay data by role, level, and geography. Walk into every offer knowing what the market is actually paying — not what it was paying six months ago.</div>
+        <span class="cap-tag">Stop losing candidates at offer</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Competitor Reports')">
+        <span class="cap-icon">📊</span>
+        <div class="cap-title">Competitor Talent Reports</div>
+        <div class="cap-desc">Headcount trends, attrition rates, average tenure by company. See who your competitors are hiring, who they're losing, and where your next candidate is likely coming from.</div>
+        <span class="cap-tag">Act before your competitors do</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Talent Pool Mapping')">
+        <span class="cap-icon">🗾</span>
+        <div class="cap-title">Talent Pool Mapping</div>
+        <div class="cap-desc">Before you open a search, map the full available pool — size, location, diversity, skills distribution. Set targets that are grounded in what actually exists, not what you hope is out there.</div>
+        <span class="cap-tag">Set realistic hiring targets</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Location + Talent Flow')">
+        <span class="cap-icon">📍</span>
+        <div class="cap-title">Location &amp; Talent Flow</div>
+        <div class="cap-desc">See where talent is clustering, where it's migrating, and what each market pays. Stop defaulting to the HQ city. Let the data tell you where to hire.</div>
+        <span class="cap-tag">Find cheaper, deeper markets</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Attrition Signals')">
+        <span class="cap-icon">⚡</span>
+        <div class="cap-title">Attrition &amp; Flight Risk Signals</div>
+        <div class="cap-desc">Average tenure by company and role. Identify competitors where leadership is turning over and professionals are ready to move — before they've even updated their LinkedIn profile.</div>
+        <span class="cap-tag">Source talent before they post</span>
+      </div>
+      <div class="cap-card" onclick="trackEvent('cap_card_click','Skills Trends')">
+        <span class="cap-icon">📈</span>
+        <div class="cap-title">Skills &amp; Experience Trends</div>
+        <div class="cap-desc">Track emerging skills in real time. See how experience distribution is shifting across your target roles. Build JDs that match what the market looks like today — not three years ago.</div>
+        <span class="cap-tag">Write better job descriptions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="scenarios">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What This Looks Like</div>
+    <h2>Intelligence that changes<br><em>how you make decisions.</em></h2>
+    <p class="section-lead">Three scenarios. Real situations. What happens when your team has the data versus when they don't.</p>
+    <div class="use-cases">
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Scenario: You're losing advisors and don't know why.</strong>
+          Your attrition is up. Exit interviews say "growth opportunities" — but that's what everyone says. You need to know if this is a you problem or a market problem.
+          <br><br>Talent Insights shows your top competitor's average advisor tenure just dropped from 4.2 years to 2.8 years. Their comp is running 8% below market. Their people are restless.
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The intelligence move</div>
+          <div class="uc-result-text">You target that firm's advisors with precision outreach — not a job posting. You know who's ready to move before they've told anyone. That's not recruiting. That's intelligence.</div>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Scenario: Leadership wants to open a new office. They've picked Dallas.</strong>
+          The decision is based on where the VP went to college and where the company already has clients. No talent data has been reviewed.
+          <br><br>You pull a Talent Insights report. The skill cluster you need is denser in Austin. Comp runs 12% lower. Competition for the same profiles is meaningfully less intense.
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The intelligence move</div>
+          <div class="uc-result-text">You bring data to a gut-feel decision — and change the outcome. TA stops being order-takers and becomes the team that saves the company $400K on a bad location call.</div>
+        </div>
+      </div>
+      <div class="use-case">
+        <div class="uc-setup">
+          <strong>Scenario: You've got a req open for 90 days. No qualified applicants.</strong>
+          The JD asks for 8 years of experience in a technology that's only existed for 5. Nobody flagged it. The hiring manager wrote it based on their last job at a Fortune 50 company.
+          <br><br>Talent Insights shows the actual experience distribution for this role. The realistic pool requires 3–4 years. The JD has been screening out 80% of qualified candidates before they ever applied.
+        </div>
+        <div class="uc-result">
+          <div class="uc-result-label">The intelligence move</div>
+          <div class="uc-result-text">You fix the JD with data — not a conversation. The req fills in three weeks. The hiring manager now asks TA to validate every JD before it posts.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section id="reframe" style="background:var(--dark-navy); padding:88px 60px;">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The Reframe</div>
+    <h2>The cost of <em>not knowing</em><br>is already on your books.</h2>
+    <p class="section-lead" style="margin-bottom:40px;">Every wrong offer, every mis-targeted search, every missed attrition signal — those aren't just hiring failures. They're budget line items.</p>
+    <div class="reframe-grid">
+      <div class="reframe-card without">
+        <div class="rf-label without">❌ Without Talent Insights</div>
+        <div class="rf-items">
+          <div class="rf-item without">❌ &nbsp;Wrong offers. Candidates decline at the finish line.</div>
+          <div class="rf-item without">❌ &nbsp;Wrong markets. Searching where the talent isn't.</div>
+          <div class="rf-item without">❌ &nbsp;Overpaying agencies for what you could source directly.</div>
+          <div class="rf-item without">❌ &nbsp;Losing talent you didn't see leaving — to competitors you can't see moving.</div>
+          <div class="rf-item without">❌ &nbsp;TA presents headcount reports. Leadership makes the strategic calls.</div>
+        </div>
+      </div>
+      <div class="reframe-card with">
+        <div class="rf-label with">✓ With Talent Insights</div>
+        <div class="rf-items">
+          <div class="rf-item with">✓ &nbsp;Right comp. Offers land. Candidates close.</div>
+          <div class="rf-item with">✓ &nbsp;Right markets. Sourcing where the talent actually is.</div>
+          <div class="rf-item with">✓ &nbsp;Direct sourcing from mapped talent pools — no middleman.</div>
+          <div class="rf-item with">✓ &nbsp;See movement before it happens. Recruit the talent that's about to be available.</div>
+          <div class="rf-item with">✓ &nbsp;TA brings data to the leadership table. Strategy follows.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE CTA -->
+<div class="page-cta">
+  <div class="page-cta-inner">
+    <div>
+      <h2>Do you know what your market looks like right now?</h2>
+      <p>Talent Insights is Layer Two. See what's happening outside your walls — before you make a move.</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="the-intelligent-workforce.html" class="btn btn-outline" onclick="trackEvent('cta_click','Back to Hub')">← Back to Hub</a>
+      <a href="hiring-engine.html" class="btn btn-primary" onclick="trackEvent('cta_click','See HEP')">See HEP + Pricing →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="li-logo-footer" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8407 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8407 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="white"/></svg>
+  <p>Layer Two · The Intelligent Workforce · LinkedIn Talent &amp; Learning Solutions</p>
+</footer>
+
+<!-- LAYER SWITCHER -->
+<div class="layer-switcher">
+  <span class="ls-label">Layers</span>
+  <div class="ls-divider"></div>
+  <a href="the-intelligent-workforce.html#develop" class="ls-link" onclick="trackEvent('layer_switch','Develop')">① Develop</a>
+  <a href="talent-insights.html" class="ls-link active" onclick="trackEvent('layer_switch','Intelligence')">② Intelligence</a>
+  <a href="hiring-engine.html" class="ls-link" onclick="trackEvent('layer_switch','HEP')">③ HEP + AI</a>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.cap-card, .scenario-card, .use-case, .shift-item, .reframe-card').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.4s ease, transform 0.4s ease';
+    fadeObs.observe(el);
+  });
+  const milestones = {25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100);
+    [25,50,75,100].forEach(m => { if(pct>=m && !milestones[m]){ milestones[m]=true; trackEvent('scroll_depth', m+'%'); } });
+  });
+</script>
+</body>
+</html>

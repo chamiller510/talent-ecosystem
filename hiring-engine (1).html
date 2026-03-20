@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiring Engine · HEP + AI · The Intelligent Workforce</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2NY7QXVRLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2NY7QXVRLL');
+  function trackEvent(action, label) {
+    gtag('event', action, { event_category: 'Hiring Engine', event_label: label });
+  }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --li-blue: #0A66C2; --li-blue-dark: #004182; --li-blue-light: #EBF3FB;
+    --warm-sand: #F8F5F0; --dark-navy: #0D1B2A;
+    --text-primary: #1B1F23; --text-secondary: #4B5563; --text-muted: #6B7280;
+    --white: #FFFFFF; --radius: 16px; --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-primary); background: var(--white); overflow-x: hidden; }
+
+  .progress-bar { position: fixed; top: 64px; left: 0; height: 3px; background: var(--li-blue); width: 0%; z-index: 99; transition: width 0.15s linear; border-radius: 0 2px 2px 0; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .li-logo-nav { height: 22px; width: auto; display: block; }
+  .nav-right { display: flex; align-items: center; gap: 4px; }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: all 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--li-blue); background: var(--li-blue-light); }
+  .nav-links a.current { color: var(--li-blue); background: var(--li-blue-light); font-weight: 600; }
+  .nav-cta { background: var(--li-blue); color: white; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 100px; text-decoration: none; margin-left: 12px; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--li-blue-dark); }
+
+  /* LAYER SWITCHER */
+  .layer-switcher { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 90; display: flex; gap: 8px; align-items: center; background: rgba(13,27,42,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 8px 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .ls-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 6px; white-space: nowrap; }
+  .ls-link { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; padding: 7px 14px; border-radius: 100px; transition: all 0.2s; white-space: nowrap; }
+  .ls-link:hover { color: white; background: rgba(255,255,255,0.1); }
+  .ls-link.active { background: var(--li-blue); color: white; }
+  .ls-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.12); }
+
+  /* HERO — dark */
+  .hero { min-height: 85vh; background: var(--dark-navy); display: flex; align-items: center; position: relative; overflow: hidden; padding: 100px 60px 80px; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(10,102,194,0.25) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; width: 100%; position: relative; z-index: 1; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+  .breadcrumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.4); color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Source Serif 4', serif; font-size: clamp(34px, 3.8vw, 52px); font-weight: 300; color: var(--white); line-height: 1.12; margin-bottom: 20px; }
+  .hero h1 strong { font-weight: 700; color: #60A5FA; }
+  .hero-sub { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 28px; }
+
+  /* ALC problem cards */
+  .alc-problems { display: flex; flex-direction: column; gap: 12px; }
+  .alc-problem { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius-sm); padding: 16px 20px; display: flex; gap: 12px; align-items: flex-start; }
+  .ap-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .ap-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .ap-text strong { color: white; }
+  .alc-stat-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 12px; }
+  .alc-stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 18px 20px; }
+  .alc-stat .num { font-family: 'Source Serif 4', serif; font-size: 28px; font-weight: 700; color: #60A5FA; line-height: 1; margin-bottom: 5px; }
+  .alc-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+  /* SHARED */
+  section { padding: 88px 60px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 14px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--li-blue); }
+  h2 { font-family: 'Source Serif 4', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 400; line-height: 1.15; margin-bottom: 14px; color: var(--text-primary); }
+  h2 em { font-style: italic; color: var(--li-blue); }
+  .section-lead { font-size: 17px; color: var(--text-secondary); line-height: 1.75; max-width: 600px; margin-bottom: 48px; font-weight: 300; }
+
+  /* HOW IT WORKS */
+  #model { background: var(--warm-sand); }
+  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .model-steps { display: flex; flex-direction: column; gap: 0; }
+  .model-step { display: flex; gap: 18px; position: relative; }
+  .model-step:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 42px; width: 2px; height: calc(100% - 4px); background: linear-gradient(to bottom, var(--li-blue), rgba(10,102,194,0.06)); }
+  .ms-num { width: 38px; height: 38px; border-radius: 50%; background: var(--li-blue); color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
+  .ms-content { padding-bottom: 28px; }
+  .ms-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .ms-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .ms-tag { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600; color: var(--li-blue); background: var(--li-blue-light); padding: 3px 10px; border-radius: 100px; }
+
+  /* Scenario visual */
+  .scenario-visual { background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .sv-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .sv-scenarios { display: flex; flex-direction: column; gap: 12px; }
+  .sv-scenario { border-radius: var(--radius-sm); padding: 16px 18px; }
+  .sv-scenario.s1 { background: rgba(10,102,194,0.07); border: 1px solid rgba(10,102,194,0.18); }
+  .sv-scenario.s2 { background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2); }
+  .sv-scenario.s3 { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); }
+  .sv-s-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .sv-s-label.s1 { color: var(--li-blue); }
+  .sv-s-label.s2 { color: #16A34A; }
+  .sv-s-label.s3 { color: #D97706; }
+  .sv-s-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .sv-s-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.45; }
+  .sv-s-badge { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; }
+  .sv-s-badge.s1 { background: rgba(10,102,194,0.12); color: var(--li-blue); }
+  .sv-s-badge.s2 { background: rgba(74,222,128,0.12); color: #16A34A; }
+  .sv-s-badge.s3 { background: rgba(245,158,11,0.12); color: #D97706; }
+
+  /* WHAT'S INSIDE */
+  #inside { background: var(--white); }
+  .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .product-card { background: var(--warm-sand); border-radius: var(--radius); padding: 30px 26px; border: 1px solid rgba(0,0,0,0.06); transition: all 0.22s; }
+  .product-card:hover { box-shadow: 0 6px 24px rgba(10,102,194,0.1); transform: translateY(-2px); border-color: var(--li-blue); }
+  .pc-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 10px; }
+  .pc-title { font-size: 17px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+  .pc-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+  .pc-highlight { font-size: 13px; font-weight: 600; color: var(--li-blue-dark); background: var(--li-blue-light); padding: 10px 14px; border-radius: var(--radius-sm); line-height: 1.5; }
+
+  /* HIDDEN VALUE */
+  #hidden { background: var(--warm-sand); }
+  .hv-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+  .hv-card { background: var(--white); border-radius: var(--radius); padding: 26px 24px; border: 1px solid rgba(0,0,0,0.06); }
+  .hv-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+  .hv-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+  .hv-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .hv-card.featured { background: var(--li-blue); border-color: transparent; }
+  .hv-card.featured .hv-title { color: white; }
+  .hv-card.featured .hv-desc { color: rgba(255,255,255,0.75); }
+
+  /* LiHA SECTION */
+  #liha { background: var(--dark-navy); }
+  #liha .section-eyebrow { color: #60A5FA; }
+  #liha .dot { background: #60A5FA; }
+  #liha h2 { color: white; }
+  #liha h2 em { color: #60A5FA; }
+  #liha .section-lead { color: rgba(255,255,255,0.55); }
+  .liha-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .liha-steps { display: flex; flex-direction: column; gap: 0; }
+  .liha-step { display: flex; gap: 16px; position: relative; }
+  .liha-step:not(:last-child)::after { content: ''; position: absolute; left: 18px; top: 42px; width: 2px; height: calc(100% - 4px); background: linear-gradient(to bottom, rgba(96,165,250,0.5), rgba(96,165,250,0.04)); }
+  .ls-badge { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; position: relative; z-index: 1; }
+  .ls-badge.ai { background: var(--li-blue); color: white; }
+  .ls-badge.human { background: rgba(255,255,255,0.12); font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: rgba(255,255,255,0.6); }
+  .ls-content { padding-bottom: 24px; }
+  .ls-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; margin-bottom: 6px; }
+  .ls-tag.ai { background: rgba(10,102,194,0.3); color: #60A5FA; }
+  .ls-tag.human { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); }
+  .ls-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 4px; }
+  .ls-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+  .liha-right { display: flex; flex-direction: column; gap: 14px; }
+  .liha-stat-big { background: var(--li-blue); border-radius: var(--radius); padding: 32px 28px; text-align: center; }
+  .lsb-num { font-family: 'Source Serif 4', serif; font-size: 64px; font-weight: 700; color: white; line-height: 1; margin-bottom: 8px; }
+  .lsb-label { font-size: 16px; color: rgba(255,255,255,0.7); font-weight: 300; }
+  .liha-metric { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 16px 20px; }
+  .lm-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .lm-value { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; color: white; }
+
+  /* STORY SECTION */
+  #story { background: var(--warm-sand); }
+  .story-card { background: var(--white); border-radius: var(--radius); padding: 36px; border-left: 4px solid var(--li-blue); box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .story-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--li-blue); margin-bottom: 16px; }
+  .story-text { font-size: 15px; line-height: 1.8; color: var(--text-secondary); }
+  .story-text strong { color: var(--text-primary); }
+  .story-outcome { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.07); font-size: 15px; font-weight: 600; color: var(--li-blue-dark); font-family: 'Source Serif 4', serif; font-style: italic; }
+
+  /* FINAL STATEMENT */
+  #statement { background: var(--dark-navy); padding: 88px 60px; }
+  #statement .section-inner { text-align: center; }
+  .final-headline { font-family: 'Source Serif 4', serif; font-size: clamp(26px, 3vw, 40px); font-weight: 400; color: white; line-height: 1.3; margin-bottom: 16px; }
+  .final-headline strong { color: #60A5FA; font-weight: 700; }
+  .final-sub { font-size: 16px; color: rgba(255,255,255,0.45); margin-bottom: 40px; font-weight: 300; }
+  .final-read { font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 12px; font-style: italic; }
+
+  /* CTA */
+  .page-cta { background: var(--li-blue-dark); padding: 72px 60px; }
+  .page-cta-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+  .page-cta h2 { color: white; font-family: 'Source Serif 4', serif; font-size: clamp(22px, 2.4vw, 32px); font-weight: 400; margin-bottom: 8px; }
+  .page-cta p { font-size: 15px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .cta-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { padding: 12px 26px; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; text-decoration: none; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+  .btn-primary { background: white; color: var(--li-blue-dark); }
+  .btn-primary:hover { background: var(--li-blue-light); }
+  .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,0.35); }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  footer { background: var(--dark-navy); padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); }
+  .li-logo-footer { height: 15px; width: auto; opacity: 0.4; }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    section, #statement, #liha { padding: 60px 24px; }
+    .hero { padding: 80px 24px 60px; }
+    .hero-inner, .model-grid, .products-grid, .hv-grid, .liha-grid, .page-cta-inner { grid-template-columns: 1fr; gap: 28px; }
+    .layer-switcher { display: none; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="the-intelligent-workforce.html">
+    <svg class="li-logo-nav" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="435.375" y="10.125" width="119.25" height="122.625" fill="white"/><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8408 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8408 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="#0A66C2"/></svg>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="the-intelligent-workforce.html#develop">Develop Your People</a></li>
+      <li><a href="talent-insights.html">Know Your Market</a></li>
+      <li><a href="hiring-engine.html" class="current">HEP + Pricing</a></li>
+    </ul>
+    <a href="#statement" class="nav-cta" onclick="trackEvent('nav_cta','The Bottom Line')">The Bottom Line ↓</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="the-intelligent-workforce.html">The Intelligent Workforce</a>
+        <span>›</span>
+        <span style="color:rgba(255,255,255,0.6);">Layer Three · HEP + AI</span>
+      </div>
+      <div class="hero-eyebrow">● Layer Three · Hiring Enterprise Program</div>
+      <h1>You're already spending.<br>The question is whether<br>it's <strong>structured right.</strong></h1>
+      <p class="hero-sub">À la carte means every time you need more, the price goes up. That's not a coincidence — that's the model. HEP is built differently: one price, 36-month certainty, and a 20% buffer that's yours at no charge.</p>
+    </div>
+    <div>
+      <div class="alc-stat-row">
+        <div class="alc-stat">
+          <div class="num">8–15%+</div>
+          <div class="lbl">Typical annual ALC price increases</div>
+        </div>
+        <div class="alc-stat">
+          <div class="num">36 mo</div>
+          <div class="lbl">HEP pricing lock — no surprises at renewal</div>
+        </div>
+        <div class="alc-stat">
+          <div class="num">20%</div>
+          <div class="lbl">Free buffer built into every HEP contract</div>
+        </div>
+        <div class="alc-stat">
+          <div class="num">$0</div>
+          <div class="lbl">Mid-year add-on conversations when under buffer</div>
+        </div>
+      </div>
+      <div class="alc-problems">
+        <div class="alc-problem">
+          <div class="ap-icon">📈</div>
+          <div class="ap-text"><strong>Mid-term adds cost today's rate.</strong> Need a seat in month 6? That's current market pricing — not what you locked at signing.</div>
+        </div>
+        <div class="alc-problem">
+          <div class="ap-icon">🔄</div>
+          <div class="ap-text"><strong>Every renewal is a renegotiation.</strong> Same cycle, every year. More spend, less predictability, zero protection.</div>
+        </div>
+        <div class="alc-problem">
+          <div class="ap-icon">📊</div>
+          <div class="ap-text"><strong>No ceiling.</strong> Hiring scales? The budget doesn't control your spend. <strong>The market does.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="model">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> The HEP Model</div>
+    <h2>One price. Built on your inputs.<br><em>With room to grow built in.</em></h2>
+    <p class="section-lead">HEP is a consumption model — not a seat count. Pricing is based on your current team size, with a 20% buffer added at no cost, and a full year of uncapped access before anyone reviews utilization.</p>
+    <div class="model-grid">
+      <div class="model-steps">
+        <div class="model-step">
+          <div class="ms-num">1</div>
+          <div class="ms-content">
+            <div class="ms-title">Priced on your current inputs</div>
+            <div class="ms-desc">We base pricing on your actual TA headcount and job volume — not some inflated projection. What you have today is what we price on.</div>
+          </div>
+        </div>
+        <div class="model-step">
+          <div class="ms-num">2</div>
+          <div class="ms-content">
+            <div class="ms-title">20% buffer added — free</div>
+            <div class="ms-desc">We apply a 20% product buffer at no additional cost. It's yours to keep regardless of what happens at month 9.</div>
+            <span class="ms-tag">No upcharge. No catch.</span>
+          </div>
+        </div>
+        <div class="model-step">
+          <div class="ms-num">3</div>
+          <div class="ms-content">
+            <div class="ms-title">Year 1: fully uncapped access</div>
+            <div class="ms-desc">No seat rationing. No "priority users only." Your whole team gets full access — Recruiter, Job Slots, Career Page, Hiring Assistant — for the full year.</div>
+          </div>
+        </div>
+        <div class="model-step">
+          <div class="ms-num">4</div>
+          <div class="ms-content">
+            <div class="ms-title">Month 9: utilization review — three paths, all better than ALC</div>
+            <div class="ms-desc">We look at your 9-month average. From there, every path protects you. The structure is designed so there's no losing scenario.</div>
+            <span class="ms-tag">See all three paths →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario-visual">
+        <div class="sv-title">Month 9 · Three Paths. Every One Beats ALC.</div>
+        <div class="sv-scenarios">
+          <div class="sv-scenario s1">
+            <div class="sv-s-label s1">Scenario 1</div>
+            <div class="sv-s-name">You stayed within the buffer</div>
+            <div class="sv-s-desc">Utilization at or below 20% over inputs. No decision needed. No additional cost. Stay uncapped through Years 2 and 3.</div>
+            <span class="sv-s-badge s1">No action required</span>
+          </div>
+          <div class="sv-scenario s2">
+            <div class="sv-s-label s2">Scenario 2</div>
+            <div class="sv-s-name">You grew past the buffer — and want to stay uncapped</div>
+            <div class="sv-s-desc">Purchase a true-up at the rate locked at signing — not today's market rate. Your original rate. Stay uncapped for Years 2 and 3.</div>
+            <span class="sv-s-badge s2">Scale with it</span>
+          </div>
+          <div class="sv-scenario s3">
+            <div class="sv-s-label s3">Scenario 3</div>
+            <div class="sv-s-name">You grew past the buffer — and pass on the true-up</div>
+            <div class="sv-s-desc">Revert to capped access. Keep the 20% buffer product — free. Any add-ons going forward stay at your locked preferred rate.</div>
+            <span class="sv-s-badge s3">Still beats ALC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section id="inside">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What's Inside</div>
+    <h2>Four products. One structure.<br><em>Everything your team needs to hire at scale.</em></h2>
+    <p class="section-lead">HEP isn't a different way to buy one product — it's the full hiring stack, consolidated into one preferred-rate contract.</p>
+    <div class="products-grid">
+      <div class="product-card" onclick="trackEvent('product_card','Recruiter Seats')">
+        <div class="pc-num">Product 01</div>
+        <div class="pc-title">LinkedIn Recruiter Seats</div>
+        <div class="pc-desc">The tool your TA team lives in every day. Advanced search across 1B+ members, InMail outreach, candidate pipeline management, collaboration tools, and ATS integrations.</div>
+        <div class="pc-highlight">Under HEP: full access for Year 1 — no seat rationing, no "priority users only."</div>
+      </div>
+      <div class="product-card" onclick="trackEvent('product_card','Job Slots')">
+        <div class="pc-num">Product 02</div>
+        <div class="pc-title">Job Slots + Job Wrapping</div>
+        <div class="pc-desc">Your roles surface in search, feeds, and in front of qualified candidates automatically. Job wrapping distributes every open role across the platform without manual lift.</div>
+        <div class="pc-highlight">Under HEP: all your roles get promoted. No more choosing which reqs get visibility.</div>
+      </div>
+      <div class="product-card" onclick="trackEvent('product_card','Employer Brand')">
+        <div class="pc-num">Product 03</div>
+        <div class="pc-title">Employer Brand + Traffic Driver Ads</div>
+        <div class="pc-desc">Always-on targeted ads that drive talent to your jobs by industry, function, and location — running 24/7, whether your team is logged in or not. Your careers page becomes a recruiting channel.</div>
+        <div class="pc-highlight">Under HEP: unlimited jobs, unlimited ads, globally. Included.</div>
+      </div>
+      <div class="product-card" onclick="trackEvent('product_card','Hiring Assistant')">
+        <div class="pc-num">Product 04 · AI</div>
+        <div class="pc-title">LinkedIn Hiring Assistant</div>
+        <div class="pc-desc">An AI agent inside Recruiter that handles sourcing, screening, outreach, and applicant triage end-to-end — so your recruiters focus on what actually requires them: relationships, decisions, and closing.</div>
+        <div class="pc-highlight">Under HEP: included at no additional cost. Not an add-on — a foundation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MOST CLIENTS DON'T KNOW -->
+<section id="hidden">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What Most Clients Don't Know</div>
+    <h2>Until someone<br><em>tells them.</em></h2>
+    <p class="section-lead">These aren't buried in the contract. They're just not in the pitch deck. Here's what actually makes HEP different from what you've heard.</p>
+    <div class="hv-grid">
+      <div class="hv-card featured">
+        <span class="hv-icon">🔒</span>
+        <div class="hv-title">Your add-on rate is locked at signing — permanently</div>
+        <div class="hv-desc">Whatever you need later — more seats, more slots — the price was set when you signed. Not when you ask. That protection does not exist on à la carte. Ever.</div>
+      </div>
+      <div class="hv-card">
+        <span class="hv-icon">🎁</span>
+        <div class="hv-title">The 20% buffer is yours to keep — no matter what</div>
+        <div class="hv-desc">Even if you decline the true-up at month 9, the buffer product stays. It was included at no cost at signing, and it doesn't go away.</div>
+      </div>
+      <div class="hv-card">
+        <span class="hv-icon">👥</span>
+        <div class="hv-title">Non-TA users don't count against your seats</div>
+        <div class="hv-desc">Hiring managers and HRBPs with Recruiter access don't eat into your seat count. They ride alongside it. Your TA team's full allocation stays intact.</div>
+      </div>
+      <div class="hv-card">
+        <span class="hv-icon">🏭</span>
+        <div class="hv-title">Frontline roles don't count against job slots</div>
+        <div class="hv-desc">Only knowledge worker roles count toward your allocation. Frontline and hourly roles get promoted without touching your inputs. Your slots go further than you think.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LiHA -->
+<section id="liha">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> LinkedIn Hiring Assistant · AI Agent</div>
+    <h2>The one clients<br><em>underestimate most.</em></h2>
+    <p class="section-lead">LiHA isn't a chatbot. It's an agent inside Recruiter that handles the transactional work of hiring end-to-end — so your recruiters focus on what they were actually hired to do.</p>
+    <div class="liha-grid">
+      <div class="liha-steps">
+        <div class="liha-step">
+          <div class="ls-badge ai">🔍</div>
+          <div class="ls-content">
+            <span class="ls-tag ai">AI handles this</span>
+            <div class="ls-title">Define &amp; Source</div>
+            <div class="ls-desc">LiHA converts role goals into optimized searches, runs them across 1B+ profiles, and delivers a ranked shortlist with plain-language explanations of fit. Your recruiter reviews 20 — not 300.</div>
+          </div>
+        </div>
+        <div class="liha-step">
+          <div class="ls-badge ai">✅</div>
+          <div class="ls-content">
+            <span class="ls-tag ai">AI handles this</span>
+            <div class="ls-title">Screen &amp; Triage Applicants</div>
+            <div class="ls-desc">Triages applicants from LinkedIn and your ATS into top / maybe / not a fit — with the reasoning shown. Stops your team from wading through 200 applications to find the 15 worth their time.</div>
+          </div>
+        </div>
+        <div class="liha-step">
+          <div class="ls-badge ai">✉️</div>
+          <div class="ls-content">
+            <span class="ls-tag ai">AI handles this</span>
+            <div class="ls-title">Draft &amp; Send Outreach</div>
+            <div class="ls-desc">Personalizes InMails at scale and handles follow-up automatically after recruiter approval. Not template blasts — actual personalization. At volume. Without the manual work.</div>
+          </div>
+        </div>
+        <div class="liha-step">
+          <div class="ls-badge human">YOU</div>
+          <div class="ls-content">
+            <span class="ls-tag human">Your team owns this</span>
+            <div class="ls-title">Relationships, Decisions &amp; Closing</div>
+            <div class="ls-desc">This is where your recruiters live. The real conversations, the culture read, the sell, the close. LiHA gives 20+ hours a week back — not by replacing them, but by eliminating everything that isn't this.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="liha-right">
+        <div class="liha-stat-big">
+          <div class="lsb-num">20+</div>
+          <div class="lsb-label">hours per recruiter per week returned</div>
+        </div>
+        <div class="liha-metric">
+          <div class="lm-label">Effective output multiplier per recruiter</div>
+          <div class="lm-value">1 recruiter = 3× capacity</div>
+        </div>
+        <div class="liha-metric">
+          <div class="lm-label">Additional headcount needed to achieve this</div>
+          <div class="lm-value">Zero. That's the point.</div>
+        </div>
+        <div class="liha-metric">
+          <div class="lm-label">Cost to add Hiring Assistant to HEP</div>
+          <div class="lm-value">Included. Not an add-on.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="dot"></div> What This Looks Like in Practice</div>
+    <h2>A day in the life<br><em>with HEP + Hiring Assistant.</em></h2>
+    <div class="story-card">
+      <div class="story-label">Before 9am</div>
+      <p class="story-text">Your recruiter opens their morning with a shortlist they didn't have to build. LiHA ran the searches overnight, ranked the candidates, and drafted personalized outreach — all they have to do is review and approve. <strong>Three qualified candidates in the pipeline before the first meeting.</strong>
+      <br><br>
+      By afternoon, a candidate who went quiet two weeks ago responds. LiHA sent the follow-up automatically after detecting the InMail open. The recruiter picks up the conversation where it matters: <strong>the close.</strong>
+      <br><br>
+      Hiring scales mid-year. A fourth recruiter joins the team and two new critical reqs open simultaneously. <strong>No mid-term add-on conversation. No paying today's rate for something you budgeted at last year's price. They just hire.</strong>
+      <br><br>
+      Month 9. The utilization review shows the team pushed just past the buffer. The true-up happens at the rate locked at signing — not what the market looks like now. <strong>Years 2 and 3 carry uncapped access at the original price.</strong></p>
+      <div class="story-outcome">That's not a best-case scenario. That's the structure working exactly as designed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL STATEMENT -->
+<section id="statement">
+  <div class="section-inner">
+    <div class="final-headline">There is <strong>no scenario where HEP<br>loses to à la carte.</strong></div>
+    <div class="final-sub">Read that again. Every path through HEP — under buffer, true up, no true up — ends with more access, better rates, and a team that can scale without a budget conversation every time hiring moves.</div>
+    <div class="cta-buttons" style="justify-content:center;">
+      <a href="the-intelligent-workforce.html" class="btn btn-outline" onclick="trackEvent('final_cta','Back to Hub')">← Back to Hub</a>
+      <a href="talent-insights.html" class="btn btn-outline" onclick="trackEvent('final_cta','Talent Insights')">See Talent Insights</a>
+    </div>
+    <div class="final-read">Seats, slots, brand, and AI — one structure, pricing locked at signing, a 20% buffer at no cost, and a reassessment that protects you every which way.</div>
+  </div>
+</section>
+
+<!-- PAGE CTA -->
+<div class="page-cta">
+  <div class="page-cta-inner">
+    <div>
+      <h2>Are you buying smart — or just buying?</h2>
+      <p>À la carte can't offer any of this. Let's talk about what HEP looks like for your team specifically.</p>
+    </div>
+    <div class="cta-buttons">
+      <a href="the-intelligent-workforce.html" class="btn btn-outline" onclick="trackEvent('cta_click','Back to Hub')">← Back to Hub</a>
+      <a href="talent-insights.html" class="btn btn-primary" onclick="trackEvent('cta_click','Talent Insights')">Also see: Talent Insights →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="li-logo-footer" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8407 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8407 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="white"/></svg>
+  <p>Layer Three · The Intelligent Workforce · LinkedIn Talent &amp; Learning Solutions</p>
+</footer>
+
+<!-- LAYER SWITCHER -->
+<div class="layer-switcher">
+  <span class="ls-label">Layers</span>
+  <div class="ls-divider"></div>
+  <a href="the-intelligent-workforce.html#develop" class="ls-link" onclick="trackEvent('layer_switch','Develop')">① Develop</a>
+  <a href="talent-insights.html" class="ls-link" onclick="trackEvent('layer_switch','Intelligence')">② Intelligence</a>
+  <a href="hiring-engine.html" class="ls-link active" onclick="trackEvent('layer_switch','HEP')">③ HEP + AI</a>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.product-card, .hv-card, .alc-problem, .sv-scenario, .liha-step, .model-step').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(16px)';
+    el.style.transition='opacity 0.4s ease, transform 0.4s ease';
+    fadeObs.observe(el);
+  });
+  const milestones = {25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100);
+    [25,50,75,100].forEach(m => { if(pct>=m && !milestones[m]){ milestones[m]=true; trackEvent('scroll_depth', m+'%'); } });
+  });
+</script>
+</body>
+</html>

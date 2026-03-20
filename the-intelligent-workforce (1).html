@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Intelligent Workforce · LinkedIn Talent Solutions</title>
+
+<!-- ✅ GOOGLE ANALYTICS — swap G-2NY7QXVRLL with your Measurement ID from analytics.google.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2NY7QXVRLL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2NY7QXVRLL');
+  function trackEvent(action, label) {
+    gtag('event', action, { event_category: 'Intelligent Workforce', event_label: label });
+  }
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --li-blue: #0A66C2;
+    --li-blue-dark: #004182;
+    --li-blue-light: #EBF3FB;
+    --warm-sand: #F8F5F0;
+    --dark-navy: #0D1B2A;
+    --text-primary: #1B1F23;
+    --text-secondary: #4B5563;
+    --text-muted: #6B7280;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-primary); background: var(--white); overflow-x: hidden; }
+
+  /* PROGRESS BAR */
+  .progress-bar { position: fixed; top: 64px; left: 0; height: 3px; background: var(--li-blue); width: 0%; z-index: 99; transition: width 0.15s linear; border-radius: 0 2px 2px 0; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0 40px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .li-logo-nav { height: 22px; width: auto; display: block; }
+  .nav-right { display: flex; align-items: center; gap: 4px; }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    text-decoration: none; padding: 8px 14px; border-radius: 8px;
+    transition: all 0.2s; white-space: nowrap; display: block;
+  }
+  .nav-links a:hover { color: var(--li-blue); background: var(--li-blue-light); }
+  .nav-links a.active { color: var(--li-blue); background: var(--li-blue-light); font-weight: 600; }
+  .nav-cta {
+    background: var(--li-blue); color: white; font-size: 13px; font-weight: 600;
+    padding: 8px 18px; border-radius: 100px; text-decoration: none;
+    margin-left: 12px; transition: background 0.2s; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--li-blue-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--dark-navy);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 60px 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(10,102,194,0.28) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -100px; left: 20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(10,102,194,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px; align-items: center; width: 100%;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.4);
+    color: #60A5FA; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(38px, 4.2vw, 56px);
+    font-weight: 300; color: var(--white); line-height: 1.12; margin-bottom: 20px;
+  }
+  .hero h1 strong { font-weight: 700; color: #60A5FA; display: block; }
+  .hero-sub {
+    font-size: 17px; line-height: 1.75; color: rgba(255,255,255,0.6);
+    margin-bottom: 32px; font-weight: 300;
+  }
+
+  /* Reality bar */
+  .hero-reality {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 20px 24px; margin-bottom: 32px;
+  }
+  .hero-reality-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #60A5FA; margin-bottom: 14px;
+  }
+  .reality-stats { display: flex; gap: 0; }
+  .reality-stat { flex: 1; padding-right: 20px; }
+  .reality-stat:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.08); margin-right: 20px; }
+  .reality-num { font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 700; color: white; line-height: 1; margin-bottom: 5px; }
+  .reality-label { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+
+  /* Layer pills */
+  .hero-layers { display: flex; flex-direction: column; gap: 10px; }
+  .hero-layer-pill {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 14px 18px;
+    cursor: pointer; text-decoration: none; transition: all 0.25s;
+  }
+  .hero-layer-pill:hover {
+    background: rgba(10,102,194,0.22); border-color: rgba(10,102,194,0.5);
+    transform: translateX(5px);
+  }
+  .pill-num {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--li-blue);
+    color: white; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pill-label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); }
+  .pill-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .pill-arrow { margin-left: auto; color: rgba(255,255,255,0.25); font-size: 14px; transition: all 0.2s; }
+  .hero-layer-pill:hover .pill-arrow { color: white; transform: translateX(2px); }
+
+  /* Hero right */
+  .hero-visual { display: flex; flex-direction: column; gap: 14px; }
+  .hero-stat-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 22px 26px;
+  }
+  .hero-stat-card.blue-card { background: var(--li-blue); border-color: transparent; }
+  .stat-row { display: flex; gap: 24px; }
+  .stat-item { flex: 1; }
+  .stat-num { font-family: 'Source Serif 4', serif; font-size: 30px; font-weight: 700; color: white; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+  .hero-quote {
+    font-size: 14px; font-style: italic; color: rgba(255,255,255,0.45);
+    font-family: 'Source Serif 4', serif; line-height: 1.65;
+    padding: 18px 22px; border-left: 3px solid var(--li-blue);
+    background: rgba(255,255,255,0.04); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  /* SHARED SECTION */
+  section { padding: 96px 60px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--li-blue); margin-bottom: 14px;
+  }
+  .layer-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--li-blue); }
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 400; line-height: 1.15; margin-bottom: 14px; color: var(--text-primary);
+  }
+  h2 em { font-style: italic; color: var(--li-blue); }
+  .section-lead { font-size: 17px; color: var(--text-secondary); line-height: 1.75; max-width: 580px; margin-bottom: 52px; font-weight: 300; }
+  .layer-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--li-blue); color: white; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 60px; margin: 0;
+    max-width: 100%;
+  }
+  .divider-line { flex: 1; height: 1px; background: rgba(0,0,0,0.08); }
+  .divider-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+
+  /* LAYER 1: DEVELOP */
+  #develop { background: var(--warm-sand); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .stat-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: var(--white); border-radius: var(--radius); padding: 22px 16px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+  .stat-card .big { font-family: 'Source Serif 4', serif; font-size: 32px; font-weight: 700; color: var(--li-blue); line-height: 1; margin-bottom: 7px; }
+  .stat-card .lbl { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .feature-list { display: flex; flex-direction: column; gap: 12px; }
+  .feature-item {
+    background: var(--white); border-radius: var(--radius-sm);
+    padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start;
+    border: 1px solid rgba(0,0,0,0.06); transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .feature-item:hover { box-shadow: 0 4px 18px rgba(10,102,194,0.1); transform: translateY(-1px); }
+  .fi-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--li-blue-light); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .fi-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .fi-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .callout-box {
+    border: 2px solid var(--li-blue); background: var(--li-blue-light);
+    border-radius: var(--radius-sm); padding: 18px 20px;
+    display: flex; gap: 14px; align-items: flex-start; margin-top: 4px;
+  }
+  .callout-box .fi-title { color: var(--li-blue-dark); }
+  .callout-box .fi-desc { color: #1e3a5f; }
+
+  /* Explore link */
+  .explore-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: var(--li-blue);
+    text-decoration: none; margin-top: 20px;
+    padding: 10px 20px; border: 2px solid var(--li-blue);
+    border-radius: 100px; transition: all 0.2s;
+  }
+  .explore-link:hover { background: var(--li-blue); color: white; }
+
+  /* LAYER 2: INTELLIGENCE */
+  #intelligence { background: var(--white); }
+  .intel-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .before-after { background: var(--warm-sand); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+  .ba-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .ba-header { padding: 12px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ba-header.before { background: #FEE2E2; color: #B91C1C; }
+  .ba-header.after { background: #DCFCE7; color: #166534; }
+  .ba-cell { padding: 14px 16px; font-size: 13px; line-height: 1.5; border-top: 1px solid rgba(0,0,0,0.06); }
+  .ba-cell.before { background: rgba(254,226,226,0.2); color: var(--text-secondary); }
+  .ba-cell.after { background: rgba(220,252,231,0.2); color: var(--text-secondary); font-weight: 500; }
+  .mini-stats { display: flex; gap: 14px; margin-bottom: 24px; }
+  .mini-stat { flex: 1; background: var(--warm-sand); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+  .mini-stat .big { font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 700; color: var(--li-blue); }
+  .mini-stat .lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .intel-cards { display: flex; flex-direction: column; gap: 10px; }
+  .intel-card { border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-sm); padding: 16px 18px; transition: all 0.2s; cursor: default; }
+  .intel-card:hover { border-color: var(--li-blue); background: var(--li-blue-light); }
+  .ic-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .ic-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* LAYER 3: HEP */
+  #engine { background: var(--dark-navy); color: white; position: relative; overflow: hidden; }
+  #engine::before {
+    content: ''; position: absolute; top: -300px; right: -200px;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(10,102,194,0.16) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  #engine .section-eyebrow { color: #60A5FA; }
+  #engine .section-eyebrow .layer-dot { background: #60A5FA; }
+  #engine h2 { color: white; }
+  #engine h2 em { color: #60A5FA; }
+  #engine .section-lead { color: rgba(255,255,255,0.55); }
+  .hep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; position: relative; z-index: 1; margin-bottom: 48px; }
+  .scenarios-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+  .scenario-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .scenario-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm); padding: 15px 18px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center;
+  }
+  .scenario-card.hi { background: rgba(10,102,194,0.2); border-color: rgba(10,102,194,0.42); }
+  .sc-icon { width: 30px; height: 30px; border-radius: 7px; background: rgba(10,102,194,0.3); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .sc-name { font-size: 14px; font-weight: 600; color: white; }
+  .sc-desc { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .sc-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 100px; background: rgba(74,222,128,0.15); color: #4ADE80; white-space: nowrap; }
+  .hidden-value { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 24px; }
+  .hv-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+  .value-items { display: flex; flex-direction: column; gap: 12px; }
+  .vi { display: flex; gap: 10px; align-items: flex-start; }
+  .vi-dot { width: 6px; height: 6px; border-radius: 50%; background: #60A5FA; margin-top: 6px; flex-shrink: 0; }
+  .vi-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .vi-text strong { color: white; }
+
+  /* OBJECTIONS */
+  .obj-section { position: relative; z-index: 1; }
+  .obj-title { font-family: 'Source Serif 4', serif; font-size: 24px; font-weight: 400; color: white; margin-bottom: 5px; }
+  .obj-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 22px; }
+  .obj-tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+  .obj-tab {
+    padding: 8px 15px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.14);
+    background: transparent; color: rgba(255,255,255,0.5); font-size: 13px;
+    font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .obj-tab.active { background: var(--li-blue); border-color: var(--li-blue); color: white; }
+  .obj-tab:hover:not(.active) { border-color: rgba(255,255,255,0.3); color: white; }
+  .obj-panel {
+    display: none; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius); padding: 26px; animation: fadeUp 0.28s ease;
+  }
+  .obj-panel.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .obj-heard {
+    font-size: 15px; font-style: italic; font-family: 'Source Serif 4', serif;
+    color: rgba(255,255,255,0.45); margin-bottom: 16px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .obj-heard::before { content: '"'; font-size: 32px; color: rgba(10,102,194,0.5); line-height: 0; vertical-align: -11px; margin-right: 3px; }
+  .obj-response { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 16px; }
+  .obj-points { display: flex; flex-direction: column; gap: 9px; }
+  .obj-point { display: flex; gap: 9px; align-items: flex-start; }
+  .obj-check {
+    width: 17px; height: 17px; border-radius: 50%; background: rgba(74,222,128,0.12);
+    border: 1px solid rgba(74,222,128,0.38); display: flex; align-items: center;
+    justify-content: center; font-size: 8px; color: #4ADE80; flex-shrink: 0; margin-top: 2px;
+  }
+  .obj-pt { font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.55; }
+  .obj-pt strong { color: white; }
+
+  /* Big statement */
+  .big-stmt {
+    text-align: center; padding: 44px 40px;
+    background: var(--li-blue); border-radius: var(--radius);
+    margin-top: 48px; position: relative; z-index: 1;
+  }
+  .big-stmt p { font-family: 'Source Serif 4', serif; font-size: clamp(18px, 2vw, 26px); font-weight: 400; color: white; line-height: 1.5; }
+  .big-stmt p strong { font-weight: 700; }
+  .explore-link-dark {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; color: white;
+    text-decoration: none; margin-top: 22px;
+    padding: 10px 22px; border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 100px; transition: all 0.2s;
+  }
+  .explore-link-dark:hover { background: white; color: var(--li-blue); border-color: white; }
+
+  /* AI SECTION */
+  #ai-section { background: var(--warm-sand); }
+  .ai-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; }
+  .ai-steps { display: flex; flex-direction: column; }
+  .ai-step { display: flex; gap: 16px; position: relative; }
+  .ai-step:not(:last-child)::after { content: ''; position: absolute; left: 17px; top: 40px; width: 2px; height: calc(100% - 4px); background: linear-gradient(to bottom, var(--li-blue), rgba(10,102,194,0.06)); }
+  .ai-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--li-blue); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; position: relative; z-index: 1; }
+  .ai-content { padding-bottom: 26px; }
+  .ai-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .ai-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .ai-box { background: var(--dark-navy); border-radius: var(--radius); padding: 40px 32px; color: white; text-align: center; }
+  .ai-big { font-family: 'Source Serif 4', serif; font-size: 68px; font-weight: 700; color: #60A5FA; line-height: 1; margin-bottom: 8px; }
+  .ai-big-lbl { font-size: 16px; color: rgba(255,255,255,0.55); margin-bottom: 26px; font-weight: 300; }
+  .ai-metric { background: rgba(10,102,194,0.2); border: 1px solid rgba(10,102,194,0.35); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 10px; }
+  .am-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+  .am-value { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; color: white; }
+
+  /* CTA */
+  .cta-section { background: var(--li-blue-dark); padding: 80px 60px; text-align: center; }
+  .cta-section h2 { color: white; font-size: clamp(24px, 2.6vw, 36px); margin-bottom: 12px; }
+  .cta-section p { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 32px; font-weight: 300; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { padding: 13px 28px; border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; text-decoration: none; font-family: 'DM Sans', sans-serif; }
+  .btn-primary { background: white; color: var(--li-blue-dark); }
+  .btn-primary:hover { background: var(--li-blue-light); }
+  .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,0.35); }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* FOOTER */
+  footer { background: var(--dark-navy); padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .li-logo-footer { height: 15px; width: auto; opacity: 0.45; }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    section { padding: 64px 24px; }
+    .hero { padding: 80px 24px 60px; }
+    .hero-inner, .two-col, .intel-layout, .hep-grid, .ai-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-visual { display: none; }
+    .stat-trio { grid-template-columns: repeat(3,1fr); }
+    .cta-section { padding: 60px 24px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" onclick="trackEvent('nav_click','Logo')">
+    <svg class="li-logo-nav" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="435.375" y="10.125" width="119.25" height="122.625" fill="white"/><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8408 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8408 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="#0A66C2"/></svg>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#develop" onclick="trackEvent('nav_click','Develop Your People')">Develop Your People</a></li>
+      <li><a href="#intelligence" onclick="trackEvent('nav_click','Know Your Market')">Know Your Market</a></li>
+      <li><a href="#engine" onclick="trackEvent('nav_click','HEP + Pricing')">HEP + Pricing</a></li>
+      <li><a href="#ai-section" onclick="trackEvent('nav_click','AI Accelerator')">AI Accelerator</a></li>
+    </ul>
+    <a href="#engine" class="nav-cta" onclick="trackEvent('nav_cta_click','See HEP')">See HEP →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span>●</span> LinkedIn Talent &amp; Learning Solutions · 2026</div>
+      <h1>Your team is stretched.<br><strong>The market isn't getting easier.</strong></h1>
+      <p class="hero-sub">90% of companies missed their hiring goals last year. TA teams are being asked to do more with less — and prove it with data. This is what LinkedIn built for exactly this moment.</p>
+
+      <div class="hero-reality">
+        <div class="hero-reality-label">The 2026 Talent Reality</div>
+        <div class="reality-stats">
+          <div class="reality-stat">
+            <div class="reality-num">90%</div>
+            <div class="reality-label">of companies missed hiring goals in 2025</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-num">84%</div>
+            <div class="reality-label">are now prioritizing cost optimization over growth</div>
+          </div>
+          <div class="reality-stat">
+            <div class="reality-num">2×</div>
+            <div class="reality-label">more applications per role — but less qualified talent</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-layers">
+        <a href="#develop" class="hero-layer-pill" onclick="trackEvent('hero_pill_click','Develop Your People')">
+          <div class="pill-num">1</div>
+          <div>
+            <div class="pill-label">Develop Your People</div>
+            <div class="pill-sub">Stop losing good employees to a lack of visible growth</div>
+          </div>
+          <div class="pill-arrow">→</div>
+        </a>
+        <a href="#intelligence" class="hero-layer-pill" onclick="trackEvent('hero_pill_click','Know Your Market')">
+          <div class="pill-num">2</div>
+          <div>
+            <div class="pill-label">Know Your Market</div>
+            <div class="pill-sub">Stop guessing on comp, talent pools, and competition</div>
+          </div>
+          <div class="pill-arrow">→</div>
+        </a>
+        <a href="#engine" class="hero-layer-pill" onclick="trackEvent('hero_pill_click','Hire Smarter + HEP')">
+          <div class="pill-num">3</div>
+          <div>
+            <div class="pill-label">Hire Smarter — and Pay Less Doing It</div>
+            <div class="pill-sub">One structure. Preferred pricing. 36 months of certainty.</div>
+          </div>
+          <div class="pill-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-stat-card blue-card">
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">1B+</div>
+            <div class="stat-label">Professional profiles updated in real time</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">12B+</div>
+            <div class="stat-label">Data points behind every market insight</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num" style="color:#60A5FA">20hrs</div>
+            <div class="stat-label" style="color:rgba(255,255,255,0.55)">Per recruiter per week returned via AI</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num" style="color:#60A5FA">22%</div>
+            <div class="stat-label" style="color:rgba(255,255,255,0.55)">Greater employee tenure with Career Hub</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-quote">
+        Two-thirds of recruiters say finding qualified candidates has gotten harder. The ones winning aren't working harder — they have better data and smarter structure.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 1: DEVELOP -->
+<section id="develop">
+  <div class="section-inner">
+    <div class="layer-badge">Layer One · Career Hub</div>
+    <div class="section-eyebrow"><div class="layer-dot"></div> Develop Your People</div>
+    <h2>Stop losing people you already<br><em>paid to develop.</em></h2>
+    <p class="section-lead">63% of employees who quit say there was no visible path forward. That's not a retention problem — it's a visibility problem. Career Hub shows people where they can go before they decide to go somewhere else.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="stat-trio">
+          <div class="stat-card">
+            <div class="big">63%</div>
+            <div class="lbl">of employees who left had no visible path forward</div>
+          </div>
+          <div class="stat-card">
+            <div class="big">8.5×</div>
+            <div class="lbl">more internal job discovery with Career Hub</div>
+          </div>
+          <div class="stat-card">
+            <div class="big">22%</div>
+            <div class="lbl">greater employee tenure when pathing is active</div>
+          </div>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="fi-icon">🔍</div>
+            <div>
+              <div class="fi-title">Skills Intelligence</div>
+              <div class="fi-desc">See every skill your team has — and every gap you're carrying. Real-time. No surveys, no guesswork.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">🗺️</div>
+            <div>
+              <div class="fi-title">Career Pathing</div>
+              <div class="fi-desc">Built from 1B+ career journeys. Shows employees exactly what's next and what they need to get there.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="fi-icon">🤖</div>
+          <div>
+            <div class="fi-title">AI Coaching + Role Play</div>
+            <div class="fi-desc">Managers rehearse tough conversations. New hires practice client interactions. Real feedback, zero awkwardness.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">🔗</div>
+          <div>
+            <div class="fi-title">Internal Mobility Engine</div>
+            <div class="fi-desc">Connects directly to LinkedIn Recruiter. Your TA team sees internal candidates first — before ever posting externally.</div>
+          </div>
+        </div>
+        <div class="callout-box">
+          <div class="fi-icon" style="background:var(--li-blue);color:white;flex-shrink:0;">💡</div>
+          <div>
+            <div class="fi-title">The cost of ignoring this is already on your books</div>
+            <div class="fi-desc">Replacing an employee costs 50–200% of their annual salary. Career Hub isn't a nice-to-have — it's cheaper than your current attrition rate.</div>
+          </div>
+        </div>
+        <a href="https://chamiller510.github.io/talent-ecosystem/career-hub.html" class="explore-link" onclick="trackEvent('explore_click','Career Hub')">Explore Career Hub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 2: INTELLIGENCE -->
+<section id="intelligence">
+  <div class="section-inner">
+    <div class="layer-badge">Layer Two · Talent Insights</div>
+    <div class="section-eyebrow"><div class="layer-dot"></div> Know Your Market</div>
+    <h2>Stop hiring on gut feeling.<br><em>The data already exists.</em></h2>
+    <p class="section-lead">You offered $180K. The market was paying $210K. You found out when they declined. With Talent Insights, you know the market rate, the talent supply, and what your competitors are doing — before you make a single move.</p>
+
+    <div class="intel-layout">
+      <div>
+        <div class="before-after">
+          <div class="ba-row">
+            <div class="ba-header before">❌ Flying Blind</div>
+            <div class="ba-header after">✓ Talent Insights</div>
+          </div>
+          <div class="ba-row">
+            <div class="ba-cell before">Offers based on last year's salary survey</div>
+            <div class="ba-cell after">Offers based on real-time market data</div>
+          </div>
+          <div class="ba-row">
+            <div class="ba-cell before">Post a role, hope the talent is there</div>
+            <div class="ba-cell after">Map the full talent pool before you post</div>
+          </div>
+          <div class="ba-row">
+            <div class="ba-cell before">Find out about competitor moves months later</div>
+            <div class="ba-cell after">See headcount trends and attrition live</div>
+          </div>
+          <div class="ba-row">
+            <div class="ba-cell before">TA can't prove strategic value to leadership</div>
+            <div class="ba-cell after">Data storytelling that earns a seat at the table</div>
+          </div>
+        </div>
+        <div class="mini-stats">
+          <div class="mini-stat"><div class="big">12B+</div><div class="lbl">Data points powering every report</div></div>
+          <div class="mini-stat"><div class="big">Daily</div><div class="lbl">Market updates — not quarterly snapshots</div></div>
+          <div class="mini-stat"><div class="big">1B+</div><div class="lbl">Profiles updated in real time</div></div>
+        </div>
+        <a href="https://chamiller510.github.io/talent-ecosystem/talent-insights.html" class="explore-link" onclick="trackEvent('explore_click','Talent Insights')">Explore Talent Insights →</a>
+      </div>
+
+      <div class="intel-cards">
+        <div class="intel-card" onclick="trackEvent('card_click','Compensation Intelligence')">
+          <div class="ic-title">💰 Compensation Intelligence</div>
+          <div class="ic-desc">Real-time pay data by role, level, and geography. Know the number before the conversation — not after the decline.</div>
+        </div>
+        <div class="intel-card" onclick="trackEvent('card_click','Competitor Reports')">
+          <div class="ic-title">📊 Competitor Talent Reports</div>
+          <div class="ic-desc">See who your competitors are hiring, who they're losing, and where headcount is trending. Act on it before they do.</div>
+        </div>
+        <div class="intel-card" onclick="trackEvent('card_click','Talent Pool Mapping')">
+          <div class="ic-title">🗾 Talent Pool Mapping</div>
+          <div class="ic-desc">Before you open a req, see the available talent. Size, location, skills. Targets grounded in reality, not optimism.</div>
+        </div>
+        <div class="intel-card" onclick="trackEvent('card_click','Attrition Signals')">
+          <div class="ic-title">⚡ Attrition &amp; Flight Risk Signals</div>
+          <div class="ic-desc">See where tenure is dropping at competitors. That's your pipeline — identify and move before they even post.</div>
+        </div>
+        <div class="intel-card" onclick="trackEvent('card_click','Skills Trends')">
+          <div class="ic-title">📈 Skills &amp; Experience Trends</div>
+          <div class="ic-desc">Track emerging skills in real time. Build JDs that match what the market looks like today — not three years ago.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYER 3: HEP -->
+<section id="engine">
+  <div class="section-inner" style="position:relative;z-index:1;">
+    <div class="layer-badge" style="background:rgba(10,102,194,0.35);color:#60A5FA;border:1px solid rgba(10,102,194,0.5);">Layer Three · HEP + AI</div>
+    <div class="section-eyebrow"><div class="layer-dot"></div> Hiring Enterprise Program</div>
+    <h2>You're already spending.<br>The question is whether<br><em>it's structured right.</em></h2>
+    <p class="section-lead">Mid-market teams can't afford to renegotiate every time hiring scales. HEP gives you uncapped access, locked rates for 36 months, and an AI layer that makes your current team punch above its weight — without adding headcount.</p>
+
+    <div class="hep-grid">
+      <div>
+        <div class="scenarios-label">Every scenario still works in your favor</div>
+        <div class="scenario-cards">
+          <div class="scenario-card hi">
+            <div class="sc-icon">📊</div>
+            <div>
+              <div class="sc-name">Under the Buffer</div>
+              <div class="sc-desc">Stay uncapped. Keep the 20% free. Nothing changes.</div>
+            </div>
+            <div class="sc-badge">Best case</div>
+          </div>
+          <div class="scenario-card">
+            <div class="sc-icon">⬆️</div>
+            <div>
+              <div class="sc-name">True Up</div>
+              <div class="sc-desc">Hiring scaled? Add-on at your original locked rate — not today's market price.</div>
+            </div>
+            <div class="sc-badge" style="background:rgba(96,165,250,0.14);color:#60A5FA;">Scale with it</div>
+          </div>
+          <div class="scenario-card">
+            <div class="sc-icon">🔒</div>
+            <div>
+              <div class="sc-name">No True Up</div>
+              <div class="sc-desc">Pass on true up. Keep buffer free. Add-ons still at preferred rates.</div>
+            </div>
+            <div class="sc-badge" style="background:rgba(200,146,42,0.14);color:#F59E0B;">Still beats ALC</div>
+          </div>
+        </div>
+        <div class="hidden-value">
+          <div class="hv-title">What most accounts don't know until someone tells them</div>
+          <div class="value-items">
+            <div class="vi"><div class="vi-dot"></div><div class="vi-text"><strong>The 20% buffer is yours — free.</strong> Quoted at your inputs. No upcharge, no catch.</div></div>
+            <div class="vi"><div class="vi-dot"></div><div class="vi-text"><strong>Non-TA users don't count against seats.</strong> HRBPs and hiring managers ride alongside your seat count.</div></div>
+            <div class="vi"><div class="vi-dot"></div><div class="vi-text"><strong>First-line roles don't count against job slots.</strong> Only knowledge worker roles affect your allocation.</div></div>
+            <div class="vi"><div class="vi-dot"></div><div class="vi-text"><strong>Add-on rates are locked at signing — permanently.</strong> Whatever you need later, you pay the price from day one. ALC can't offer that.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="obj-section">
+        <div class="obj-title">We hear you. Here's the honest answer.</div>
+        <div class="obj-sub">Click the concern that sounds most familiar.</div>
+        <div class="obj-tabs">
+          <button class="obj-tab active" onclick="showObj('roi',event)">Hard to justify the cost</button>
+          <button class="obj-tab" onclick="showObj('timing',event)">Timing isn't right</button>
+          <button class="obj-tab" onclick="showObj('alc',event)">ALC is working fine</button>
+        </div>
+
+        <div id="obj-roi" class="obj-panel active">
+          <div class="obj-heard">We can't tie this back to ROI right now.</div>
+          <p class="obj-response">Fair — and it's the right question. Here's the honest math:</p>
+          <div class="obj-points">
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>You're likely already paying for the individual pieces.</strong> HEP consolidates Recruiter, Job Slots, Career Page, and AI into one preferred-rate contract. The question isn't cost — it's structure.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>The 20% buffer has real dollar value.</strong> Whether you use it or not, that headroom is yours at no additional charge. That's pricing protection, not a upsell.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>Hiring Assistant changes the unit economics.</strong> 20+ hours returned per recruiter per week — without adding headcount. That's a real, showable operating cost reduction.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>84% of companies are optimizing costs right now.</strong> HEP is the cost optimization play — not the expansion play. Frame it accordingly.</div></div>
+          </div>
+        </div>
+
+        <div id="obj-timing" class="obj-panel">
+          <div class="obj-heard">The timing just isn't right. We're mid-cycle.</div>
+          <p class="obj-response">Budget cycles are real. But HEP is built to work with them — not wait for them.</p>
+          <div class="obj-points">
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>The 36-month lock protects your next two cycles.</strong> Pricing is set now. If LinkedIn pricing moves, your contract doesn't. Starting mid-cycle means your next two renewals are already handled.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>Every month at ALC is a month without preferred rates.</strong> HEP is our deepest discount program — and that discount isn't guaranteed to hold.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>True up happens at end of Y1 — not upfront.</strong> You get a full year of uncapped access, then we review utilization together. There's no pay-first model here.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>We can work with your cycle.</strong> Start dates and payment terms can flex. Let's find a structure that fits the budget conversation you're already having.</div></div>
+          </div>
+        </div>
+
+        <div id="obj-alc" class="obj-panel">
+          <div class="obj-heard">Our current ALC setup is working. Why change what's working?</div>
+          <p class="obj-response">ALC works — for stable, predictable hiring. Here's what most ALC accounts don't realize they're leaving behind:</p>
+          <div class="obj-points">
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>ALC caps you. HEP doesn't.</strong> If hiring scales — even seasonally — ALC means renegotiation at today's rate. HEP absorbs it within the buffer or adds at your locked rate.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>ALC can include Hiring Assistant and Advanced Career Page — but as add-ons at extra cost.</strong> HEP bundles both into one preferred-rate contract. Same products, meaningfully lower effective rate.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>ALC pricing isn't protected.</strong> Your next renewal is a renegotiation. HEP locks rates for 36 months — including add-ons. That's predictability ALC structurally cannot offer.</div></div>
+            <div class="obj-point"><div class="obj-check">✓</div><div class="obj-pt"><strong>"Working" and "optimized" aren't the same thing.</strong> ALC works. HEP works harder — with more access, more tools, and a cost structure that grows with you instead of against you.</div></div>
+          </div>
+        </div>
+
+        <a href="https://chamiller510.github.io/talent-ecosystem/hiring-engine.html" class="explore-link-dark" onclick="trackEvent('explore_click','Hiring Engine')">See the full HEP breakdown →</a>
+      </div>
+    </div>
+
+    <div class="big-stmt">
+      <p>There is <strong>no scenario where HEP loses to à la carte.</strong><br>Every path ends with more access, better rates, and a team that can actually scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI ACCELERATOR -->
+<section id="ai-section">
+  <div class="section-inner">
+    <div class="layer-badge">AI Accelerator · Included in HEP</div>
+    <div class="section-eyebrow"><div class="layer-dot"></div> LinkedIn Hiring Assistant</div>
+    <h2>20+ hours a week back<br>to your team. <em>Without adding headcount.</em></h2>
+    <p class="section-lead">93% of recruiters plan to increase their use of AI in 2026. Hiring Assistant isn't a chatbot — it's an agent that sources, screens, drafts outreach, and triages applicants so your recruiters focus on what actually requires them.</p>
+
+    <div class="ai-grid">
+      <div class="ai-steps">
+        <div class="ai-step">
+          <div class="ai-icon">🔍</div>
+          <div class="ai-content">
+            <div class="ai-title">Sources — Finds candidates overnight</div>
+            <div class="ai-desc">Runs searches across 1B+ profiles while your team is offline. Delivers a ranked shortlist with plain-language explanations of why each person fits.</div>
+          </div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-icon">✅</div>
+          <div class="ai-content">
+            <div class="ai-title">Screens — Qualifies before your team touches it</div>
+            <div class="ai-desc">Triages applicants from LinkedIn and your ATS into top / maybe / not a fit — with the reasoning shown. Your recruiter reviews 20, not 200.</div>
+          </div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-icon">✉️</div>
+          <div class="ai-content">
+            <div class="ai-title">Drafts — Personalized outreach at scale</div>
+            <div class="ai-desc">Personalizes InMails and handles follow-up automatically. Sends after recruiter approval. No template blasts — actual personalization, at volume.</div>
+          </div>
+        </div>
+        <div class="ai-step">
+          <div class="ai-icon">✕</div>
+          <div class="ai-content">
+            <div class="ai-title">Multiplies — Every recruiter × 3</div>
+            <div class="ai-desc">Your team focuses on what requires them: relationships, culture reads, and closing. Everything before that? The agent handles it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-box">
+        <div class="ai-big">20+</div>
+        <div class="ai-big-lbl">hours per recruiter per week returned</div>
+        <div class="ai-metric">
+          <div class="am-label">Effective recruiter output multiplier</div>
+          <div class="am-value">1 recruiter = 3× capacity</div>
+        </div>
+        <div class="ai-metric">
+          <div class="am-label">Additional headcount required</div>
+          <div class="am-value">Zero. That's the point.</div>
+        </div>
+        <div class="ai-metric">
+          <div class="am-label">Included in HEP at</div>
+          <div class="am-value">No additional cost</div>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:18px;">Hiring Assistant is not an add-on. It's a foundation — included in every HEP contract.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="section-inner">
+    <h2>Are you building a workforce<br>or just filling seats?</h2>
+    <p>Three layers. One connected system. Built for where your team is right now.</p>
+    <div class="cta-buttons">
+      <a href="#develop" class="btn btn-primary" onclick="trackEvent('cta_click','Explore the Ecosystem')">Explore the Ecosystem</a>
+      <a href="#engine" class="btn btn-outline" onclick="trackEvent('cta_click','See HEP Pricing')">See HEP + Pricing</a>
+      <a href="https://chamiller510.github.io/talent-ecosystem/hiring-engine.html" class="btn btn-outline" onclick="trackEvent('cta_click','Full HEP Breakdown')">Full HEP Breakdown →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <svg class="li-logo-footer" width="579" height="144" viewBox="0 0 579 144" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.1672 21.2974V102.208H63.2143V122.706H0V21.2974H22.1672ZM73.0012 122.677H94.3097V53.9547H73.0012V122.677ZM83.6554 19.7937C76.8407 19.7937 71.304 25.3419 71.304 32.1735C71.304 39.0051 76.8407 44.5533 83.6554 44.5533C90.4701 44.5533 96.0155 39.0167 96.0155 32.1735C96.0155 25.3303 90.4788 19.7937 83.6554 19.7937ZM183.372 122.703H204.672V88.7328H204.949L227.556 122.703H254.332L226.972 85.7429L254.919 53.9258H228.805L204.674 81.8983V21.2916H183.375V122.703H183.372ZM106.092 122.677H127.4V88.6923C127.4 79.7312 129.1 71.0454 140.176 71.0454C151.253 71.0454 151.259 81.2899 151.259 89.263V122.677H172.567V84.9896C172.567 66.491 168.589 52.2599 147 52.2599C136.629 52.2599 129.67 57.95 126.83 63.3591H126.547V53.9663H106.094V122.679L106.092 122.677ZM271.639 80.3251C272.2 73.6355 277.317 67.2297 286.688 67.2297C294.364 67.2297 299.904 73.2067 299.765 80.3251H271.642H271.639ZM302.884 99.8176C299.331 104.659 294.647 108.217 287.685 108.217C279.445 108.217 273.33 102.949 271.636 94.8373H321.065V88.1476C321.065 66.0882 308.574 51.8601 288.677 51.8601C267.377 51.8601 250.33 66.0882 250.33 88.1476C250.33 110.207 267.377 124.45 288.677 124.45C299.762 124.45 310.971 119.464 317.795 110.778L302.882 99.8176H302.884ZM365.442 70.5731C376.105 70.5731 382.495 77.6974 382.495 88.0781C382.495 98.4588 376.102 105.586 365.442 105.586C354.782 105.586 348.407 98.4791 348.407 88.0781C348.407 77.6771 354.797 70.5731 365.442 70.5731ZM402.101 21.2916H380.789V60.8907H380.509C375.677 54.2039 367.44 51.7847 358.628 51.7847C339.028 51.7847 327.099 69.4316 327.099 88.6517C327.099 109.578 340.589 124.374 361.048 124.374C370.71 124.374 378.939 118.536 382.217 113.556H382.495V122.668H402.101V21.2916ZM556.476 0C562.337 0 567.113 4.64712 567.113 10.3778V133.608C567.113 139.344 562.337 144 556.476 144H434.014C428.162 144 423.409 139.344 423.409 133.608V10.3778C423.409 4.64712 428.162 0 434.014 0H556.476ZM466.029 53.9866H444.715V122.708H466.029V53.9866ZM455.378 44.591C462.192 44.591 467.729 39.0399 467.729 32.2054C467.729 25.3709 462.192 19.8256 455.378 19.8256C448.563 19.8256 443.018 25.3738 443.018 32.2054C443.018 39.037 448.549 44.591 455.378 44.591ZM545.862 85.0128C545.862 66.5112 541.878 52.2772 520.295 52.2772C509.924 52.2772 502.973 57.9732 500.128 63.3765H499.845V53.9866H479.398V122.708H500.698V88.7126C500.698 79.7486 502.395 71.0657 513.489 71.0657C524.583 71.0657 524.565 81.316 524.565 89.2891V122.708H545.865V85.0128H545.862ZM574.96 120L576.148 121.802H575.529L574.425 120.063L574.408 120.043H573.693V121.802H573.115V117.76H574.653C575.607 117.76 576.07 118.134 576.07 118.901C576.07 119.533 575.714 119.907 575.035 119.991L574.957 120H574.96ZM574.367 119.585C574.983 119.585 575.492 119.533 575.492 118.87C575.492 118.293 574.989 118.221 574.549 118.221H573.696V119.585H574.367ZM574.431 115.961C576.573 115.961 578.25 117.641 578.25 119.785C578.25 121.929 576.573 123.609 574.431 123.609C572.288 123.609 570.608 121.932 570.608 119.785C570.608 117.638 572.288 115.961 574.431 115.961ZM574.431 123.108C576.258 123.108 577.689 121.663 577.689 119.785C577.689 117.908 576.255 116.465 574.431 116.465C572.606 116.465 571.169 117.911 571.169 119.785C571.169 121.66 572.603 123.108 574.431 123.108Z" fill="white"/></svg>
+  <p>The Intelligent Workforce · LinkedIn Talent &amp; Learning Solutions</p>
+</footer>
+
+<script>
+  // Objection tabs
+  function showObj(id, e) {
+    document.querySelectorAll('.obj-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.obj-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('obj-' + id).classList.add('active');
+    e.target.classList.add('active');
+    trackEvent('objection_tab_click', id);
+  }
+
+  // Smooth scroll with nav offset
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer.observe(s));
+
+  // Scroll fade-in
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.feature-item, .intel-card, .scenario-card, .ai-step, .stat-card, .callout-box').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    fadeObserver.observe(el);
+  });
+
+  // GA: track scroll depth milestones
+  const milestones = { 25: false, 50: false, 75: false, 100: false };
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    [25, 50, 75, 100].forEach(m => {
+      if (pct >= m && !milestones[m]) {
+        milestones[m] = true;
+        trackEvent('scroll_depth', m + '%');
+      }
+    });
+  });
+</script>
+</body>
+</html>
